@@ -1,6 +1,6 @@
 <div align="center">
 
-|                                           ← Previous                                            | [⬆ Back to TOC](../README.md#part-1) |                                          Next →                                          |
+|                                           ← Previous                                            | [⬆ Back to TOC](../README.md#part-2) |                                          Next →                                          |
 | :---------------------------------------------------------------------------------------------: | :-----------------------------------: | :--------------------------------------------------------------------------------------: |
 | [Chapter 4: module.exports & require](../S1%2004%20-%20module.export%20%26%20require/Readme.md) |                                       | [Chapter 6: libuv & async IO](../S1%2006%20-%20libuv%20%26%20async%20IO/Readme.md) |
 
@@ -10,7 +10,7 @@
 
 # Chapter 5 — Diving into the Node.js GitHub Repo &nbsp;
 
-> **Season 1** | Part I — Node.js Fundamentals & Modules
+> **Season 1** | Part II — Node.js Architecture & Internals
 
 ---
 
@@ -304,7 +304,7 @@ function readFile(path, callback) {
 
 <div align="center">
 
-|                                           ← Previous                                            | [⬆ Back to TOC](../README.md#part-1) |                                          Next →                                          |
+|                                           ← Previous                                            | [⬆ Back to TOC](../README.md#part-2) |                                          Next →                                          |
 | :---------------------------------------------------------------------------------------------: | :-----------------------------------: | :--------------------------------------------------------------------------------------: |
 | [Chapter 4: module.exports & require](../S1%2004%20-%20module.export%20%26%20require/Readme.md) |                                       | [Chapter 6: libuv & async IO](../S1%2006%20-%20libuv%20%26%20async%20IO/Readme.md) |
 
