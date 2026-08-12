@@ -114,112 +114,6 @@ require("X")
           → Throw Error: Cannot find module 'X'
 ```
 
-```javascript
-// File extension is optional for .js and .json
-require("./utils"); // Resolves to ./utils.js
-require("./data"); // Resolves to ./data.json (if no .js exists)
-require("./lib"); // Resolves to ./lib/index.js (if lib is a directory)
-```
-
-#### Exporting from a Module
-
-##### Exporting a Single Value
-
-```javascript
-// greet.js — Export a single function
-function greet(name) {
-  return `Hello, ${name}!`;
-}
-
-module.exports = greet;
-```
-
-```javascript
-// app.js — Import the single export
-const greet = require("./greet");
-console.log(greet("Akshay")); // "Hello, Akshay!"
-```
-
-##### Exporting Multiple Values
-
-```javascript
-// utils.js — Export multiple functions/values
-const add = (a, b) => a + b;
-const subtract = (a, b) => a - b;
-const PI = 3.14159;
-
-module.exports = { add, subtract, PI };
-```
-
-```javascript
-// app.js — Import with destructuring
-const { add, subtract, PI } = require("./utils");
-console.log(add(5, 3)); // 8
-console.log(subtract(10, 4)); // 6
-console.log(PI); // 3.14159
-```
-
-##### Exporting a Class
-
-```javascript
-// User.js
-class User {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-  greet() {
-    return `Hi, I'm ${this.name} (${this.age})`;
-  }
-}
-
-module.exports = User;
-```
-
-```javascript
-// app.js
-const User = require("./User");
-const u = new User("Harshit", 25);
-console.log(u.greet()); // "Hi, I'm Harshit (25)"
-```
-
-#### `exports` vs `module.exports` — The Gotcha ⚠️
-
-`exports` is a **shorthand reference** to `module.exports`. Initially, they point to the **same object**:
-
-```javascript
-console.log(exports === module.exports); // true
-```
-
-**✅ This works** — adding properties to `exports`:
-
-```javascript
-// utils.js
-exports.add = (a, b) => a + b;
-exports.subtract = (a, b) => a - b;
-// Both are on module.exports because exports === module.exports
-```
-
-**❌ This BREAKS** — reassigning `exports`:
-
-```javascript
-// broken.js
-exports = { add: (a, b) => a + b }; // ❌ BROKEN!
-// This reassigns the local `exports` variable
-// module.exports is still {} (empty)
-```
-
-**The Rule:**
-
-| Operation                       | Works? | Why                                                           |
-| ------------------------------- | ------ | ------------------------------------------------------------- |
-| `exports.x = value`             | ✅     | Adds property to the shared object                            |
-| `module.exports.x = value`      | ✅     | Same effect — adds property to the shared object              |
-| `module.exports = { x: value }` | ✅     | Replaces the entire export (this is what gets returned)       |
-| `exports = { x: value }`        | ❌     | Only reassigns the local variable, `module.exports` unchanged |
-
-> 💡 **Golden Rule**: When in doubt, always use `module.exports`. Node.js returns **`module.exports`** from `require()`, never `exports`.
-
 #### Module Caching
 
 Node.js **caches** modules after the first `require()` call. Subsequent `require()` calls return the **same cached object** — the module code is **NOT re-executed**.
@@ -322,130 +216,253 @@ node a.js
 | **`this` at Top Level** | `module.exports`               | `undefined`                                                 |
 | **Default in Node.js**  | ✅ Default                     | Opt-in via `.mjs` or `package.json`                         |
 
-```javascript
-// ===== CommonJS (.js / .cjs) =====
-const fs = require("fs");
-const { add } = require("./utils");
-module.exports = { myFunction };
-
-// ===== ES Modules (.mjs or "type": "module") =====
-import fs from "fs";
-import { add } from "./utils.mjs";
-export function myFunction() {
-  /* ... */
-}
-export default myFunction;
-```
+---
 
 ### Code Example
 
-#### Complete Module System Demo
+#### 1. CommonJS Module Demo (`using-cjs/`)
 
 ```
-project/
-├── app.js          (entry point)
-├── math.js         (local module — exports functions)
-├── config.json     (JSON module — auto-parsed)
-└── logger.js       (local module — exports class)
-```
-
-```javascript
-// math.js — Exporting multiple functions
-const add = (a, b) => a + b;
-const subtract = (a, b) => a - b;
-const multiply = (a, b) => a * b;
-
-// Using module.exports (the correct way for multiple exports)
-module.exports = { add, subtract, multiply };
+using-cjs/
+├── package.json              ("type": "commonjs")
+├── app.js                    (entry point)
+├── data.json                 (JSON module — auto-parsed)
+└── calculate/
+    ├── index.js              (barrel file — binds all functions)
+    ├── sum.js                (exports sum function)
+    ├── multiply.js           (exports multiply function)
+    └── isPrime.js            (exports isPrime function)
 ```
 
 ```json
-// config.json — JSON files are auto-parsed by require()
+// package.json
 {
-  "appName": "Namaste Node",
-  "version": "1.0.0",
-  "debug": true
+  "type": "commonjs",
+  "main": "app.js"
 }
 ```
 
 ```javascript
-// logger.js — Exporting a class
-class Logger {
-  constructor(prefix) {
-    this.prefix = prefix;
-  }
-  log(msg) {
-    console.log(`[${this.prefix}] ${msg}`);
-  }
-  error(msg) {
-    console.error(`[${this.prefix} ERROR] ${msg}`);
-  }
+// calculate/sum.js — Exporting a single function
+function sum(a, b) {
+  console.log("inside sum function");
+  return a + b;
 }
 
-module.exports = Logger;
+module.exports = { sum };
 ```
 
 ```javascript
-// app.js — The entry point, importing everything
-const { add, subtract, multiply } = require("./math"); // Local module
-const config = require("./config.json"); // JSON module
-const Logger = require("./logger"); // Local module (class)
-const path = require("path"); // Core module
-const fs = require("fs"); // Core module
+// calculate/multiply.js — Exporting a single function
+function multiply(a, b) {
+  console.log("inside multiply function");
+  return a * b;
+}
 
-// Use imported modules
-const logger = new Logger(config.appName);
+module.exports = { multiply };
+```
 
-logger.log(`App: ${config.appName} v${config.version}`);
-logger.log(`5 + 3 = ${add(5, 3)}`);
-logger.log(`10 - 4 = ${subtract(10, 4)}`);
-logger.log(`6 * 7 = ${multiply(6, 7)}`);
-logger.log(`Debug mode: ${config.debug}`);
-logger.log(`Current dir: ${__dirname}`);
-logger.log(`Current file: ${path.basename(__filename)}`);
+```javascript
+// calculate/isPrime.js — Exporting a single function
+function isPrime(p) {
+  console.log("inside isPrime function");
+  for (var i = 2; i < p; i++) {
+    if (p % i == 0) {
+      return false;
+    }
+  }
+  return true;
+}
 
-// Prove module caching
-const math1 = require("./math");
-const math2 = require("./math");
-logger.log(`Same cached module? ${math1 === math2}`); // true
+module.exports = { isPrime };
+```
+
+```javascript
+// calculate/index.js — Barrel file (binds all functions together)
+// Binding of a functions...
+const { sum } = require("./sum");
+const { multiply } = require("./multiply");
+const { isPrime } = require("./isPrime");
+
+module.exports = { sum, multiply, isPrime };
+```
+
+```json
+// data.json — JSON files are auto-parsed by require()
+{
+  "name": "Harshit Singh",
+  "age": 25,
+  "city": "Noida",
+  "contact": {
+    "email": "xyz@email.com",
+    "phone": 9876543210
+  },
+  "skills": ["JS", "HTML", "CSS", "NODE JS"]
+}
+```
+
+```javascript
+// app.js — The entry point, importing everything using require()
+// Common JS Module Used - require, module.exports
+// Every node project/file is called as a module
+
+var app = "app file executed...";
+console.log(app);
+
+const { sum, multiply, isPrime } = require("./calculate/index"); // require is used to import a module
+
+var a = 3;
+var b = 8;
+var p = 7;
+
+console.log(sum(a, b));
+console.log(multiply(a, b));
+console.log(isPrime(p));
+
+const jsonData = require("./data.json"); // importing json file
+
+console.log("jsonData: ", jsonData);
 ```
 
 **Output:**
 
 ```
-[Namaste Node] App: Namaste Node v1.0.0
-[Namaste Node] 5 + 3 = 8
-[Namaste Node] 10 - 4 = 6
-[Namaste Node] 6 * 7 = 42
-[Namaste Node] Debug mode: true
-[Namaste Node] Current dir: C:\Users\harshit\project
-[Namaste Node] Current file: app.js
-[Namaste Node] Same cached module? true
+app file executed...
+inside sum function
+11
+inside multiply function
+24
+inside isPrime function
+true
+jsonData:  {
+  name: 'Harshit Singh',
+  age: 25,
+  city: 'Noida',
+  contact: { email: 'xyz@email.com', phone: 9876543210 },
+  skills: [ 'JS', 'HTML', 'CSS', 'NODE JS' ]
+}
 ```
 
-#### The `module` Object — What It Contains
+---
+
+#### 2. ES Modules Demo (`using-mjs/`)
+
+```
+using-mjs/
+├── package.json              ("type": "module")
+├── app.js                    (entry point)
+├── data.json                 (JSON module — imported with assertion)
+└── calculate/
+    ├── index.js              (barrel file — binds all functions)
+    ├── sum.js                (exports sum function)
+    ├── multiply.js           (exports multiply function)
+    └── isPrime.js            (exports isPrime function)
+```
+
+```json
+// package.json — "type": "module" enables ES Module syntax
+{
+  "type": "module",
+  "main": "app.js"
+}
+```
 
 ```javascript
-// inspect-module.js
-console.log(module);
+// calculate/sum.js — Named export directly on the function
+export function sum(a, b) {
+  console.log("inside sum function");
+  return a + b;
+}
 ```
 
-```bash
-node inspect-module.js
-# Module {
-#   id: '.',                    ← '.' means this is the entry point
-#   path: 'C:\\project',
-#   exports: {},                ← What this module exports
-#   filename: 'C:\\project\\inspect-module.js',
-#   loaded: false,              ← true after fully loaded
-#   children: [],               ← Modules this file required
-#   paths: [                    ← Where Node.js searches for node_modules
-#     'C:\\project\\node_modules',
-#     'C:\\node_modules',
-#     'C:\\node_modules'
-#   ]
-# }
+```javascript
+// calculate/multiply.js — Named export directly on the function
+export function multiply(a, b) {
+  console.log("inside multiply function");
+  return a * b;
+}
 ```
+
+```javascript
+// calculate/isPrime.js — Named export directly on the function
+export function isPrime(p) {
+  console.log("inside isPrime function");
+  for (var i = 2; i < p; i++) {
+    if (p % i == 0) {
+      return false;
+    }
+  }
+  return true;
+}
+```
+
+```javascript
+// calculate/index.js — Barrel file (binds all functions together)
+// Binding of a functions...
+import { sum } from "./sum.js";
+import { multiply } from "./multiply.js";
+import { isPrime } from "./isPrime.js";
+
+export { sum, multiply, isPrime };
+```
+
+```json
+// data.json
+{
+  "name": "Harshit Singh",
+  "age": 25,
+  "city": "Noida",
+  "contact": {
+    "email": "xyz@email.com",
+    "phone": 9876543210
+  },
+  "skills": ["JS", "HTML", "CSS", "NODE JS"]
+}
+```
+
+```javascript
+// app.js — The entry point, importing everything using import
+// ES Module Used - import, export
+// Every node project/file is called as a module
+
+var app = "app file executed...";
+console.log(app);
+
+import { sum, multiply, isPrime } from "./calculate/index.js"; // import is used to import a module
+
+var a = 3;
+var b = 8;
+var p = 7;
+
+console.log(sum(a, b));
+console.log(multiply(a, b));
+console.log(isPrime(p));
+
+import jsonData from "./data.json" with { type: "json" }; // importing json file
+
+console.log("jsonData: ", jsonData);
+```
+
+**Output:**
+
+```
+app file executed...
+inside sum function
+11
+inside multiply function
+24
+inside isPrime function
+true
+jsonData:  {
+  name: 'Harshit Singh',
+  age: 25,
+  city: 'Noida',
+  contact: { email: 'xyz@email.com', phone: 9876543210 },
+  skills: [ 'JS', 'HTML', 'CSS', 'NODE JS' ]
+}
+```
+
+> 💡 **Key Differences to Notice:** In CJS, functions are defined normally and exported via `module.exports = { ... }`. In ESM, functions use `export` keyword directly. CJS uses `require()` while ESM uses `import`. For JSON files, CJS uses `require("./data.json")` while ESM uses `import ... with { type: "json" }`. ESM also requires `.js` file extensions in import paths.
 
 ### Common Mistakes
 
