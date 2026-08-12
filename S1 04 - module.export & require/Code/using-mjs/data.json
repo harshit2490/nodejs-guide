@@ -1,0 +1,10 @@
+{
+  "name": "Harshit Singh",
+  "age": 25,
+  "city": "Noida",
+  "contact": {
+    "email": "xyz@email.com",
+    "phone": 9876543210
+  },
+  "skills": ["JS", "HTML", "CSS", "NODE JS"]
+}
