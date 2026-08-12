@@ -1,4 +1,14 @@
-# Chapter 1 — Introduction to Node.js &nbsp; <sup>[⬆ Back to Table of Contents](../README.md#part-1)</sup>
+<div align="center">
+
+| ← Previous | [⬆ Back to TOC](../README.md#part-1) |                                      Next →                                      |
+| :--------: | :------------------------------------: | :------------------------------------------------------------------------------: |
+|     —      |                                        | [Chapter 2: JS on the Server](../S1%2002%20-%20JS%20on%20the%20Server/Readme.md) |
+
+</div>
+
+---
+
+# Chapter 1 — Introduction to Node.js &nbsp;
 
 > **Season 1** | Part I — Node.js Fundamentals & Modules
 
@@ -16,12 +26,13 @@
 
 Node.js combines two powerful components:
 
-| Component    | What It Is                                      | Role in Node.js                                                                   |
-| ------------ | ----------------------------------------------- | --------------------------------------------------------------------------------- |
-| **V8 Engine** | Google's open-source JavaScript engine (C++)     | Parses and executes JavaScript code, compiles JS to machine code via JIT           |
-| **libuv**    | Cross-platform async I/O library (C)             | Handles file system, networking, timers, child processes — provides the Event Loop |
+| Component     | What It Is                                   | Role in Node.js                                                                    |
+| ------------- | -------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **V8 Engine** | Google's open-source JavaScript engine (C++) | Parses and executes JavaScript code, compiles JS to machine code via JIT           |
+| **libuv**     | Cross-platform async I/O library (C)         | Handles file system, networking, timers, child processes — provides the Event Loop |
 
 Together, they give JavaScript the ability to:
+
 - Access the **file system** (`fs` module)
 - Create **HTTP servers** (`http` module)
 - Interact with **databases**, **operating system**, and **network**
@@ -53,10 +64,10 @@ Traditional servers (like Apache) use a **blocking model** — each request occu
 
 Node.js uses **non-blocking I/O** — it delegates I/O tasks to the OS/libuv and continues processing. When the I/O completes, a callback is triggered.
 
-| Model                | How It Handles I/O                            | Concurrency                 |
-| -------------------- | --------------------------------------------- | --------------------------- |
-| **Blocking (Apache)**    | Thread waits until I/O completes              | One thread per connection   |
-| **Non-Blocking (Node)** | Delegates I/O, continues execution            | Single thread + Event Loop  |
+| Model                   | How It Handles I/O                 | Concurrency                |
+| ----------------------- | ---------------------------------- | -------------------------- |
+| **Blocking (Apache)**   | Thread waits until I/O completes   | One thread per connection  |
+| **Non-Blocking (Node)** | Delegates I/O, continues execution | Single thread + Event Loop |
 
 ##### 3. Single-Threaded (with Multi-Threaded Support)
 
@@ -64,30 +75,30 @@ Node.js runs JavaScript on a **single thread** (the Event Loop), but offloads he
 
 #### Node.js vs Browser JavaScript
 
-| Feature                | Browser JS                          | Node.js                                  |
-| ---------------------- | ----------------------------------- | ---------------------------------------- |
-| **Engine**             | V8 (Chrome), SpiderMonkey (Firefox) | V8                                       |
-| **Global Object**      | `window`                            | `global` / `globalThis`                  |
-| **DOM Access**         | ✅ Yes (`document`, `window`)        | ❌ No DOM                                 |
-| **File System Access** | ❌ No (sandboxed)                    | ✅ Yes (`fs` module)                      |
-| **Module System**      | ES Modules (`import`/`export`)      | CommonJS (`require`) + ES Modules        |
-| **HTTP Server**        | ❌ Cannot create servers             | ✅ Built-in `http` module                 |
-| **Use Case**           | Frontend, UI interactions           | Backend, APIs, CLI tools, microservices  |
+| Feature                | Browser JS                          | Node.js                                 |
+| ---------------------- | ----------------------------------- | --------------------------------------- |
+| **Engine**             | V8 (Chrome), SpiderMonkey (Firefox) | V8                                      |
+| **Global Object**      | `window`                            | `global` / `globalThis`                 |
+| **DOM Access**         | ✅ Yes (`document`, `window`)       | ❌ No DOM                               |
+| **File System Access** | ❌ No (sandboxed)                   | ✅ Yes (`fs` module)                    |
+| **Module System**      | ES Modules (`import`/`export`)      | CommonJS (`require`) + ES Modules       |
+| **HTTP Server**        | ❌ Cannot create servers            | ✅ Built-in `http` module               |
+| **Use Case**           | Frontend, UI interactions           | Backend, APIs, CLI tools, microservices |
 
 ### Development History of Node.js
 
 #### Timeline
 
-| Year | Event                                                                                                   |
-| ---- | ------------------------------------------------------------------------------------------------------- |
-| 2009 | **Ryan Dahl** creates Node.js. Initially experiments with **SpiderMonkey**, then adopts **V8 engine**   |
-| 2009 | Project originally named **web.js**, renamed to **Node.js** to reflect broader potential                |
-| 2009 | **Joyent** (technology company) sponsors and supports Node.js development                               |
-| 2010 | **NPM** (Node Package Manager) is introduced — developed by **Isaac Z. Schlueter**                     |
-| 2011 | Microsoft collaborates to bring Node.js and NPM to **Windows** (initially macOS/Linux only)            |
-| 2012 | Ryan Dahl steps down; **Isaac Z. Schlueter** (NPM creator) takes over Node.js leadership               |
-| 2014 | **Fedor Indutny** forks Node.js → creates **io.js** due to governance disagreements                    |
-| 2015 | Node.js and io.js communities reunify under the **Node.js Foundation**                                  |
+| Year | Event                                                                                                    |
+| ---- | -------------------------------------------------------------------------------------------------------- |
+| 2009 | **Ryan Dahl** creates Node.js. Initially experiments with **SpiderMonkey**, then adopts **V8 engine**    |
+| 2009 | Project originally named **web.js**, renamed to **Node.js** to reflect broader potential                 |
+| 2009 | **Joyent** (technology company) sponsors and supports Node.js development                                |
+| 2010 | **NPM** (Node Package Manager) is introduced — developed by **Isaac Z. Schlueter**                       |
+| 2011 | Microsoft collaborates to bring Node.js and NPM to **Windows** (initially macOS/Linux only)              |
+| 2012 | Ryan Dahl steps down; **Isaac Z. Schlueter** (NPM creator) takes over Node.js leadership                 |
+| 2014 | **Fedor Indutny** forks Node.js → creates **io.js** due to governance disagreements                      |
+| 2015 | Node.js and io.js communities reunify under the **Node.js Foundation**                                   |
 | 2019 | **JS Foundation** + **Node.js Foundation** merge → **OpenJS Foundation** for community-driven governance |
 
 #### Why Was Node.js Created?
@@ -121,18 +132,20 @@ Client 10,000 ─┘
 ```javascript
 // ✅ Checking your Node.js environment
 console.log("Hello from Node.js!");
-console.log("Node.js Version:", process.version);      // e.g., v20.11.0
-console.log("Platform:", process.platform);            // e.g., win32, linux, darwin
-console.log("Architecture:", process.arch);            // e.g., x64, arm64
+console.log("Node.js Version:", process.version); // e.g., v20.11.0
+console.log("Platform:", process.platform); // e.g., win32, linux, darwin
+console.log("Architecture:", process.arch); // e.g., x64, arm64
 console.log("Current Directory:", process.cwd());
 ```
 
 **Run it:**
+
 ```bash
 node app.js
 ```
 
 **Output:**
+
 ```
 Hello from Node.js!
 Node.js Version: v20.11.0
@@ -147,13 +160,13 @@ The `process` object is a **global** in Node.js (no `require` needed). It provid
 
 ```javascript
 // process is a global object — available everywhere in Node.js
-console.log(typeof process);         // "object"
-console.log(typeof window);          // "undefined" — no DOM in Node.js!
+console.log(typeof process); // "object"
+console.log(typeof window); // "undefined" — no DOM in Node.js!
 
 // Key properties
-console.log(process.pid);            // Process ID
-console.log(process.env.PATH);       // Environment variable
-console.log(process.argv);           // Command-line arguments
+console.log(process.pid); // Process ID
+console.log(process.env.PATH); // Environment variable
+console.log(process.argv); // Command-line arguments
 ```
 
 #### Node.js REPL (Read-Eval-Print Loop)
@@ -190,6 +203,7 @@ console.log("3 — End");
 ```
 
 **Output:**
+
 ```
 1 — Start
 3 — End
@@ -200,14 +214,14 @@ console.log("3 — End");
 
 ### Common Mistakes
 
-| Mistake                                                    | Why It's Wrong                                                                                                              |
-| ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| "Node.js is a programming language"                        | ❌ Node.js is a **runtime environment**. The language is JavaScript                                                          |
-| "Node.js is a framework like Express"                      | ❌ Node.js is a **runtime**. Express is a framework built **on top of** Node.js                                              |
-| "Node.js is single-threaded, so it can't handle many requests" | ❌ Single-threaded refers to the **Event Loop**. Heavy I/O is offloaded to libuv's **thread pool** and the OS                |
-| "Node.js is only for web servers"                          | ❌ Node.js powers CLI tools, desktop apps (Electron), IoT, real-time apps, build tools, and more                            |
-| "Node.js created NPM"                                     | ❌ NPM was created by **Isaac Z. Schlueter** in 2010 as a separate project, later bundled with Node.js                      |
-| "Blocking and non-blocking produce different results"      | ❌ Both produce the **same result** — the difference is in **when** and **how** the result is delivered (sync vs async)      |
+| Mistake                                                        | Why It's Wrong                                                                                                          |
+| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| "Node.js is a programming language"                            | ❌ Node.js is a **runtime environment**. The language is JavaScript                                                     |
+| "Node.js is a framework like Express"                          | ❌ Node.js is a **runtime**. Express is a framework built **on top of** Node.js                                         |
+| "Node.js is single-threaded, so it can't handle many requests" | ❌ Single-threaded refers to the **Event Loop**. Heavy I/O is offloaded to libuv's **thread pool** and the OS           |
+| "Node.js is only for web servers"                              | ❌ Node.js powers CLI tools, desktop apps (Electron), IoT, real-time apps, build tools, and more                        |
+| "Node.js created NPM"                                          | ❌ NPM was created by **Isaac Z. Schlueter** in 2010 as a separate project, later bundled with Node.js                  |
+| "Blocking and non-blocking produce different results"          | ❌ Both produce the **same result** — the difference is in **when** and **how** the result is delivered (sync vs async) |
 
 <div style="font-size: 22px; color: red">
 <details>
@@ -263,8 +277,8 @@ console.log("3 — End");
 
 <div align="center">
 
-| ← Previous | [📑 Table of Contents](../README.md#part-1) | Next → |
-| :---------: | :-----------------------------------: | :----: |
-| —           |                                       | [Chapter 2: JS on the Server](../S1%2002%20-%20JS%20on%20the%20Server/Readme.md) |
+| ← Previous | [⬆ Back to TOC](../README.md#part-1) |                                      Next →                                      |
+| :--------: | :------------------------------------: | :------------------------------------------------------------------------------: |
+|     —      |                                        | [Chapter 2: JS on the Server](../S1%2002%20-%20JS%20on%20the%20Server/Readme.md) |
 
 </div>
