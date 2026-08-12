@@ -1,4 +1,14 @@
-# Chapter 3 — Writing First Code &nbsp; <sup>[⬆ Back to Table of Contents](../README.md#part-1)</sup>
+<div align="center">
+
+|                                    ← Previous                                    | [⬆ Back to TOC](../README.md#part-1) |                                             Next →                                             |
+| :------------------------------------------------------------------------------: | :------------------------------------: | :--------------------------------------------------------------------------------------------: |
+| [Chapter 2: JS on the Server](../S1%2002%20-%20JS%20on%20the%20Server/Readme.md) |                                        | [Chapter 4: module.export & require](../S1%2004%20-%20module.export%20%26%20require/Readme.md) |
+
+</div>
+
+---
+
+# Chapter 3 — Writing First Code &nbsp;
 
 > **Season 1** | Part I — Node.js Fundamentals & Modules
 
@@ -17,10 +27,10 @@ This chapter covers the practical foundations of working with Node.js — from *
 1. Visit [https://nodejs.org](https://nodejs.org)
 2. You'll see two versions:
 
-| Version         | Best For                                     | Stability     |
-| --------------- | -------------------------------------------- | ------------- |
-| **LTS**         | Production apps, learning, most users        | ✅ Most stable |
-| **Current**     | Experimenting with latest features           | ⚠️ Less stable |
+| Version     | Best For                              | Stability      |
+| ----------- | ------------------------------------- | -------------- |
+| **LTS**     | Production apps, learning, most users | ✅ Most stable |
+| **Current** | Experimenting with latest features    | ⚠️ Less stable |
 
 > 💡 Always choose **LTS** unless you have a specific reason to use Current.
 
@@ -46,12 +56,12 @@ If both commands return version numbers, Node.js is installed correctly.
 
 #### Four Ways to Run JavaScript in Node.js
 
-| Method          | Command                           | Best For                                      |
-| --------------- | --------------------------------- | --------------------------------------------- |
-| **File**        | `node app.js`                     | Writing real programs and scripts              |
-| **Inline**      | `node -e "console.log('Hi')"`     | Quick one-liners, shell scripting              |
-| **REPL**        | `node` (enter interactive mode)   | Experimenting, testing snippets, learning      |
-| **Stdin (Pipe)**| `echo "console.log(1+1)" \| node` | Piping code from other commands                |
+| Method           | Command                           | Best For                                  |
+| ---------------- | --------------------------------- | ----------------------------------------- |
+| **File**         | `node app.js`                     | Writing real programs and scripts         |
+| **Inline**       | `node -e "console.log('Hi')"`     | Quick one-liners, shell scripting         |
+| **REPL**         | `node` (enter interactive mode)   | Experimenting, testing snippets, learning |
+| **Stdin (Pipe)** | `echo "console.log(1+1)" \| node` | Piping code from other commands           |
 
 ##### Method 1: Running a JavaScript File
 
@@ -95,6 +105,7 @@ node
 ```
 
 The REPL is an interactive shell that:
+
 1. **R**eads your input
 2. **E**valuates the expression
 3. **P**rints the result
@@ -148,15 +159,15 @@ The REPL is more powerful than it looks. Here are its key features:
 
 ##### REPL Dot Commands
 
-| Command       | What It Does                                                |
-| ------------- | ----------------------------------------------------------- |
-| `.help`       | Shows all available REPL commands                           |
-| `.exit`       | Exits the REPL (same as `Ctrl + D` or typing `process.exit()`) |
-| `.break`      | Cancels the current multi-line input                        |
-| `.clear`      | Resets the REPL context (clears all variables)              |
-| `.save file`  | Saves the current REPL session to a file                    |
-| `.load file`  | Loads and executes a file in the REPL                       |
-| `.editor`     | Enters multi-line editor mode                               |
+| Command      | What It Does                                                   |
+| ------------ | -------------------------------------------------------------- |
+| `.help`      | Shows all available REPL commands                              |
+| `.exit`      | Exits the REPL (same as `Ctrl + D` or typing `process.exit()`) |
+| `.break`     | Cancels the current multi-line input                           |
+| `.clear`     | Resets the REPL context (clears all variables)                 |
+| `.save file` | Saves the current REPL session to a file                       |
+| `.load file` | Loads and executes a file in the REPL                          |
+| `.editor`    | Enters multi-line editor mode                                  |
 
 ##### Multi-Line Editor Mode
 
@@ -193,33 +204,33 @@ Press `Tab` in the REPL to auto-complete:
 
 ##### REPL vs Browser Console
 
-| Feature                   | Browser Console        | Node.js REPL              |
-| ------------------------- | ---------------------- | ------------------------- |
-| **DOM access**            | ✅ `document`, `window` | ❌ Not available           |
-| **File system**           | ❌ Sandboxed            | ✅ `require("fs")`         |
-| **Multi-line editor**     | ✅ Shift+Enter          | ✅ `.editor` command       |
-| **Save session**          | ❌ No                   | ✅ `.save filename`        |
-| **Last result variable**  | ✅ `$_`                 | ✅ `_`                     |
-| **Tab completion**        | ✅ Yes                  | ✅ Yes                     |
-| **Exit**                  | Close browser tab       | `.exit` or `Ctrl+D`      |
+| Feature                  | Browser Console         | Node.js REPL         |
+| ------------------------ | ----------------------- | -------------------- |
+| **DOM access**           | ✅ `document`, `window` | ❌ Not available     |
+| **File system**          | ❌ Sandboxed            | ✅ `require("fs")`   |
+| **Multi-line editor**    | ✅ Shift+Enter          | ✅ `.editor` command |
+| **Save session**         | ❌ No                   | ✅ `.save filename`  |
+| **Last result variable** | ✅ `$_`                 | ✅ `_`               |
+| **Tab completion**       | ✅ Yes                  | ✅ Yes               |
+| **Exit**                 | Close browser tab       | `.exit` or `Ctrl+D`  |
 
 #### The `console` Object — Beyond `console.log`
 
 Node.js inherits the familiar `console` object but also adds some powerful methods:
 
-| Method                  | What It Does                                                   |
-| ----------------------- | -------------------------------------------------------------- |
-| `console.log()`         | Prints to **stdout** — general output                          |
-| `console.error()`       | Prints to **stderr** — for errors (different stream)           |
-| `console.warn()`        | Prints to **stderr** — for warnings                            |
-| `console.table()`       | Displays data in a formatted **table**                         |
-| `console.time(label)`   | Starts a **timer** with a label                                |
-| `console.timeEnd(label)`| Stops the timer and prints elapsed time                        |
-| `console.dir(obj)`      | Prints object with **syntax highlighting** and depth control   |
-| `console.count(label)`  | Counts how many times a label has been logged                  |
-| `console.clear()`       | Clears the terminal screen                                     |
-| `console.assert()`      | Prints error only if assertion **fails**                       |
-| `console.trace()`       | Prints the **call stack trace**                                |
+| Method                   | What It Does                                                 |
+| ------------------------ | ------------------------------------------------------------ |
+| `console.log()`          | Prints to **stdout** — general output                        |
+| `console.error()`        | Prints to **stderr** — for errors (different stream)         |
+| `console.warn()`         | Prints to **stderr** — for warnings                          |
+| `console.table()`        | Displays data in a formatted **table**                       |
+| `console.time(label)`    | Starts a **timer** with a label                              |
+| `console.timeEnd(label)` | Stops the timer and prints elapsed time                      |
+| `console.dir(obj)`       | Prints object with **syntax highlighting** and depth control |
+| `console.count(label)`   | Counts how many times a label has been logged                |
+| `console.clear()`        | Clears the terminal screen                                   |
+| `console.assert()`       | Prints error only if assertion **fails**                     |
+| `console.trace()`        | Prints the **call stack trace**                              |
 
 ### Code Example
 
@@ -240,8 +251,8 @@ console.error("❌ This is an error (goes to stderr)");
 // console.table — perfect for structured data
 const chapters = [
   { chapter: 1, title: "Introduction to NodeJs", status: "✅ Done" },
-  { chapter: 2, title: "JS on the Server",       status: "✅ Done" },
-  { chapter: 3, title: "Writing First Code",      status: "🔄 Current" },
+  { chapter: 2, title: "JS on the Server", status: "✅ Done" },
+  { chapter: 3, title: "Writing First Code", status: "🔄 Current" },
 ];
 console.table(chapters);
 
@@ -265,19 +276,20 @@ console.assert(5 < 3, "This WILL print — 5 is not less than 3");
 ```
 
 **Output:**
+
 ```
 === Welcome to Node.js ===
 Node Version: v20.11.0
 Current Directory: C:\Users\harshit\projects
 ⚠️  This is a warning (goes to stderr)
 ❌ This is an error (goes to stderr)
-┌─────────┬─────────┬───────────────────────────┬───────────────┐
-│ (index) │ chapter │          title            │   status      │
-├─────────┼─────────┼───────────────────────────┼───────────────┤
-│    0    │    1    │ 'Introduction to NodeJs'  │ '✅ Done'    │
-│    1    │    2    │ 'JS on the Server'        │ '✅ Done'    │ 
-│    2    │    3    │ 'Writing First Code'      │ '🔄 Current' │
-└─────────┴─────────┴───────────────────────────┴───────────────┘
+┌─────────┬─────────┬──────────────────────────┬────────────┐
+│ (index) │ chapter │          title           │   status   │
+├─────────┼─────────┼──────────────────────────┼────────────┤
+│    0    │    1    │ 'Introduction to NodeJs'  │  '✅ Done'  │
+│    1    │    2    │ 'JS on the Server'        │  '✅ Done'  │
+│    2    │    3    │ 'Writing First Code'      │ '🔄 Current'│
+└─────────┴─────────┴──────────────────────────┴────────────┘
 loop-timer: 5.123ms
 Sum of 1 to 999,999: 499999500000
 iteration: 1
@@ -323,14 +335,14 @@ node args.js Harshit 25
 
 ### Common Mistakes
 
-| Mistake                                                    | Why It's Wrong                                                                                                              |
-| ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| "I can run JS files by double-clicking them"               | ❌ `.js` files need to be executed via `node filename.js` in a terminal. Double-clicking opens them in a text editor          |
-| "The REPL and running a file are the same thing"           | ❌ REPL is **interactive** (one expression at a time). Files are executed **start to finish** in one go                       |
-| "`console.log` and `console.error` go to the same place"   | ❌ `console.log` writes to **stdout**, while `console.error` and `console.warn` write to **stderr** — different streams      |
-| "Node.js REPL is just like the browser console"            | ❌ Similar but different — REPL has `.save`, `.load`, `.editor` mode, and no DOM access. Browser console has DOM + `$_`      |
-| "You need to install `console` in Node.js"                 | ❌ `console` is a **global** — available everywhere without `require()`                                                      |
-| "`process.argv` starts with my arguments"                  | ❌ `argv[0]` = node path, `argv[1]` = script path. Your arguments start from `argv[2]`                                      |
+| Mistake                                                  | Why It's Wrong                                                                                                          |
+| -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| "I can run JS files by double-clicking them"             | ❌ `.js` files need to be executed via `node filename.js` in a terminal. Double-clicking opens them in a text editor    |
+| "The REPL and running a file are the same thing"         | ❌ REPL is **interactive** (one expression at a time). Files are executed **start to finish** in one go                 |
+| "`console.log` and `console.error` go to the same place" | ❌ `console.log` writes to **stdout**, while `console.error` and `console.warn` write to **stderr** — different streams |
+| "Node.js REPL is just like the browser console"          | ❌ Similar but different — REPL has `.save`, `.load`, `.editor` mode, and no DOM access. Browser console has DOM + `$_` |
+| "You need to install `console` in Node.js"               | ❌ `console` is a **global** — available everywhere without `require()`                                                 |
+| "`process.argv` starts with my arguments"                | ❌ `argv[0]` = node path, `argv[1]` = script path. Your arguments start from `argv[2]`                                  |
 
 <div style="font-size: 22px; color: red">
 <details>
@@ -386,8 +398,8 @@ node args.js Harshit 25
 
 <div align="center">
 
-| ← Previous | [📑 Table of Contents](../README.md#part-1) | Next → |
-| :---------: | :-------------------------------------------: | :----: |
-| [Chapter 2: JS on the Server](../S1%2002%20-%20JS%20on%20the%20Server/Readme.md) | | [Chapter 4: module.export & require](../S1%2004%20-%20module.export%20%26%20require/Readme.md) |
+|                                    ← Previous                                    | [⬆ Back to TOC](../README.md#part-1) |                                             Next →                                             |
+| :------------------------------------------------------------------------------: | :------------------------------------: | :--------------------------------------------------------------------------------------------: |
+| [Chapter 2: JS on the Server](../S1%2002%20-%20JS%20on%20the%20Server/Readme.md) |                                        | [Chapter 4: module.export & require](../S1%2004%20-%20module.export%20%26%20require/Readme.md) |
 
 </div>
