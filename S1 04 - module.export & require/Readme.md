@@ -24,7 +24,7 @@ This is the **CommonJS (CJS)** module system — Node.js's original and default 
 
 ### How It Works
 
-#### The Module Wrapper Function (IIFE)
+#### The Module Wrapper Function (IIFE - Immediately Invoked Function Expression)
 
 Before executing your code, Node.js **wraps every file** in a function called the **Module Wrapper**:
 
