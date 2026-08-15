@@ -119,28 +119,28 @@ The **V8 engine** converts JavaScript from human-readable code to machine code i
   JavaScript Source Code
           │
           ▼
-  ┌───────────────┐
-  │    Parser      │   Reads code, checks syntax, tokenizes
-  └───────┬───────┘
+  ┌─────────────────┐
+  │    Parser       │   Reads code, checks syntax, tokenizes
+  └───────┬─────────┘
           │
           ▼
-  ┌───────────────┐
-  │      AST       │   Abstract Syntax Tree — structured representation
-  └───────┬───────┘
+  ┌─────────────────┐
+  │      AST        │   Abstract Syntax Tree — structured representation
+  └───────┬─────────┘
           │
           ▼
-  ┌───────────────┐
-  │   Ignition     │   V8's Interpreter — generates Bytecode
-  │  (Interpreter) │   Executes code quickly on first run
-  └───────┬───────┘
+  ┌─────────────────┐
+  │   Ignition      │   V8's Interpreter — generates Bytecode
+  │  (Interpreter)  │   Executes code quickly on first run
+  └───────┬─────────┘
           │
       Hot code detected? (frequently executed)
           │
           ▼
-  ┌───────────────┐
+  ┌────────────────┐
   │   TurboFan     │   V8's Optimizing Compiler
   │  (Compiler)    │   Compiles hot bytecode → optimized Machine Code
-  └───────┬───────┘
+  └───────┬────────┘
           │
           ▼
     Machine Code (CPU executes directly)
