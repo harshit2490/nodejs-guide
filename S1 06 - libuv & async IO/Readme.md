@@ -28,29 +28,29 @@ libuv doesn't perform the actual I/O tasks itself — it **manages and delegates
 #### Where libuv Fits in the Node.js Architecture
 
 ```
-┌──────────────────────────────────────────────────────┐
+┌───────────────────────────────────────────────────────┐
 │                  Your JavaScript Code                 │
 │              (app.js, server.js, etc.)                │
-└─────────────────────┬────────────────────────────────┘
+└─────────────────────┬─────────────────────────────────┘
                       │
-┌─────────────────────▼────────────────────────────────┐
+┌─────────────────────▼─────────────────────────────────┐
 │           Node.js Standard Library (JS)               │
 │          (lib/fs.js, lib/http.js, etc.)               │
-└─────────────────────┬────────────────────────────────┘
+└─────────────────────┬─────────────────────────────────┘
                       │
-┌─────────────────────▼────────────────────────────────┐
+┌─────────────────────▼─────────────────────────────────┐
 │             Node.js C++ Bindings (src/)               │
 │      (Bridges JavaScript ↔ System-level C/C++)        │
-└──────────┬─────────────────────────┬─────────────────┘
+└──────────┬─────────────────────────┬──────────────────┘
            │                         │
-┌──────────▼──────────┐   ┌─────────▼──────────────────┐
-│     V8 Engine        │   │         libuv               │
-│  (JS → Machine Code) │   │  (Event Loop, Async I/O,    │
-│  (Memory Management) │   │   Thread Pool, Timers,      │
+┌──────────▼───────────┐   ┌─────────▼────────────────────┐
+│     V8 Engine        │   │         libuv                │
+│  (JS → Machine Code) │   │  (Event Loop, Async I/O,     │
+│  (Memory Management) │   │   Thread Pool, Timers,       │
 │                      │   │   Cross-platform Abstractions│
-└──────────────────────┘   └─────────┬──────────────────┘
+└──────────────────────┘   └─────────┬────────────────────┘
                                      │
-                           ┌─────────▼──────────────────┐
+                           ┌─────────▼────────────────────┐
                            │   Operating System Kernel    │
                            │  (epoll, kqueue, IOCP, etc.) │
                            └──────────────────────────────┘
@@ -277,26 +277,26 @@ emitter.emit("data", { id: 1, name: "Akshay" });
 The event loop is libuv's **core mechanism**. It keeps Node.js running as long as there are pending operations:
 
 ```
-   ┌───────────────────────────┐
+    ┌──────────────────────────┐
 ┌─►│         Timers             │  ← setTimeout, setInterval callbacks
-│  └─────────────┬─────────────┘
-│  ┌─────────────▼─────────────┐
+│   └─────────────┬────────────┘
+│   ┌─────────────▼────────────┐
 │  │     Pending Callbacks      │  ← I/O callbacks deferred from previous loop
-│  └─────────────┬─────────────┘
-│  ┌─────────────▼─────────────┐
+│   └─────────────┬────────────┘
+│   ┌─────────────▼────────────┐
 │  │     Idle, Prepare          │  ← Internal use only
-│  └─────────────┬─────────────┘
-│  ┌─────────────▼─────────────┐
+│   └─────────────┬────────────┘
+│   ┌─────────────▼────────────┐
 │  │         Poll               │  ← Retrieve new I/O events; execute I/O callbacks
-│  └─────────────┬─────────────┘
-│  ┌─────────────▼─────────────┐
+│   └─────────────┬────────────┘
+│   ┌─────────────▼────────────┐
 │  │         Check              │  ← setImmediate callbacks
-│  └─────────────┬─────────────┘
-│  ┌─────────────▼─────────────┐
+│   └─────────────┬────────────┘
+│   ┌─────────────▼────────────┐
 │  │      Close Callbacks       │  ← socket.on('close'), cleanup
-│  └─────────────┬─────────────┘
-│                │
-└────────────────┘  (loops back if there are pending operations)
+│   └─────────────┬────────────┘
+│                 │
+└─────────────────┘  (loops back if there are pending operations)
 ```
 
 > ⚠️ This is an introductory overview. The **detailed phases, microtask queues, and execution order** are covered in **Chapter 9 — libuv and Event Loop**.
