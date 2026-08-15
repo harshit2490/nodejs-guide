@@ -1,8 +1,8 @@
 <div align="center">
 
-|                                           ← Previous                                            | [⬆ Back to TOC](../README.md#part-2) |                                          Next →                                          |
-| :---------------------------------------------------------------------------------------------: | :-----------------------------------: | :--------------------------------------------------------------------------------------: |
-| [Chapter 4: module.exports & require](../S1%2004%20-%20module.export%20%26%20require/Readme.md) |                                       | [Chapter 6: libuv & async IO](../S1%2006%20-%20libuv%20%26%20async%20IO/Readme.md) |
+|                                           ← Previous                                            | [⬆ Back to TOC](../README.md#part-2) |                                       Next →                                       |
+| :---------------------------------------------------------------------------------------------: | :----------------------------------: | :--------------------------------------------------------------------------------: |
+| [Chapter 4: module.exports & require](../S1%2004%20-%20module.export%20%26%20require/Readme.md) |                                      | [Chapter 6: libuv & async IO](../S1%2006%20-%20libuv%20%26%20async%20IO/Readme.md) |
 
 </div>
 
@@ -11,6 +11,7 @@
 # Chapter 5 — Diving into the Node.js GitHub Repo &nbsp;
 
 > **Season 1** | Part II — Node.js Architecture & Internals
+> [🎬Link](https://namastedev.com/learn/namaste-node/diving-into-the-nodejs-github-repo)
 
 ---
 
@@ -55,16 +56,16 @@ graph TB
 
 #### The Core Components
 
-| Component | Language | What It Does |
-| --- | --- | --- |
-| **V8** | C++ | Google's JavaScript engine (same one in Chrome). Parses and compiles JavaScript into machine code. Handles memory management (garbage collection). |
-| **libuv** | C | Provides the **event loop**, **async I/O**, **thread pool**, **timers**, and cross-platform system operations (file system, networking, child processes). |
-| **Node.js Bindings** | C++ | The "glue" layer that connects JavaScript functions to C/C++ system calls. When you call `fs.readFile()` in JS, bindings translate that into actual system-level file operations. |
-| **Node.js Standard Library** | JavaScript | The built-in modules you use every day — `fs`, `http`, `path`, `events`, `stream`, `crypto`, etc. These are written in JavaScript and call into the C++ bindings. |
-| **c-ares** | C | Asynchronous DNS resolution |
-| **OpenSSL** | C | TLS/SSL encryption for HTTPS, crypto operations |
-| **zlib** | C | Compression/decompression (gzip, deflate) |
-| **llhttp** | C | HTTP request/response parser |
+| Component                    | Language   | What It Does                                                                                                                                                                      |
+| ---------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **V8**                       | C++        | Google's JavaScript engine (same one in Chrome). Parses and compiles JavaScript into machine code. Handles memory management (garbage collection).                                |
+| **libuv**                    | C          | Provides the **event loop**, **async I/O**, **thread pool**, **timers**, and cross-platform system operations (file system, networking, child processes).                         |
+| **Node.js Bindings**         | C++        | The "glue" layer that connects JavaScript functions to C/C++ system calls. When you call `fs.readFile()` in JS, bindings translate that into actual system-level file operations. |
+| **Node.js Standard Library** | JavaScript | The built-in modules you use every day — `fs`, `http`, `path`, `events`, `stream`, `crypto`, etc. These are written in JavaScript and call into the C++ bindings.                 |
+| **c-ares**                   | C          | Asynchronous DNS resolution                                                                                                                                                       |
+| **OpenSSL**                  | C          | TLS/SSL encryption for HTTPS, crypto operations                                                                                                                                   |
+| **zlib**                     | C          | Compression/decompression (gzip, deflate)                                                                                                                                         |
+| **llhttp**                   | C          | HTTP request/response parser                                                                                                                                                      |
 
 #### How a Simple `fs.readFile()` Call Flows Through the Architecture
 
@@ -120,15 +121,15 @@ nodejs/node/
 
 #### Key Directories Explained
 
-| Directory | What's Inside | Why It Matters |
-| --- | --- | --- |
-| **`lib/`** | JavaScript source for all built-in modules (`fs`, `http`, `path`, etc.) | This is the code that runs when you call `require("fs")`. You can read these files to understand exactly what any built-in function does. |
-| **`lib/internal/`** | Internal modules used by Node.js itself | Not exposed to users via `require()`. Used by `lib/` modules internally. Prefixed with `internal/` to prevent accidental access. |
-| **`src/`** | C++ source code — Node.js bindings | Bridges the gap between JavaScript and the operating system. When `lib/fs.js` needs to actually read a file, it calls into `src/node_file.cc`. |
-| **`deps/v8/`** | Google's V8 engine source | The engine that compiles and executes your JavaScript. Node.js vendors (includes) a specific version of V8. |
-| **`deps/uv/`** | libuv source code | Provides the event loop, async I/O, thread pool, timers, and cross-platform abstractions. This is the heart of Node.js's non-blocking model. |
-| **`deps/openssl/`** | OpenSSL library | Handles all cryptographic operations — HTTPS, TLS, `crypto` module functionality. |
-| **`test/`** | Thousands of test files | Node.js has an extensive test suite. Great for understanding expected behavior of any API. |
+| Directory           | What's Inside                                                           | Why It Matters                                                                                                                                 |
+| ------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`lib/`**          | JavaScript source for all built-in modules (`fs`, `http`, `path`, etc.) | This is the code that runs when you call `require("fs")`. You can read these files to understand exactly what any built-in function does.      |
+| **`lib/internal/`** | Internal modules used by Node.js itself                                 | Not exposed to users via `require()`. Used by `lib/` modules internally. Prefixed with `internal/` to prevent accidental access.               |
+| **`src/`**          | C++ source code — Node.js bindings                                      | Bridges the gap between JavaScript and the operating system. When `lib/fs.js` needs to actually read a file, it calls into `src/node_file.cc`. |
+| **`deps/v8/`**      | Google's V8 engine source                                               | The engine that compiles and executes your JavaScript. Node.js vendors (includes) a specific version of V8.                                    |
+| **`deps/uv/`**      | libuv source code                                                       | Provides the event loop, async I/O, thread pool, timers, and cross-platform abstractions. This is the heart of Node.js's non-blocking model.   |
+| **`deps/openssl/`** | OpenSSL library                                                         | Handles all cryptographic operations — HTTPS, TLS, `crypto` module functionality.                                                              |
+| **`test/`**         | Thousands of test files                                                 | Node.js has an extensive test suite. Great for understanding expected behavior of any API.                                                     |
 
 #### Tracing a Module: From `require("fs")` to C++
 
@@ -169,14 +170,14 @@ V8 is an open-source **JavaScript and WebAssembly engine** developed by Google. 
 
 #### Key Facts About V8
 
-| Aspect | Detail |
-| --- | --- |
-| **Written in** | C++ |
-| **Created by** | Google (for Chrome) |
-| **Location in repo** | `deps/v8/` |
-| **Compilation** | JIT (Just-In-Time) — compiles JS to machine code at runtime |
+| Aspect                 | Detail                                                                   |
+| ---------------------- | ------------------------------------------------------------------------ |
+| **Written in**         | C++                                                                      |
+| **Created by**         | Google (for Chrome)                                                      |
+| **Location in repo**   | `deps/v8/`                                                               |
+| **Compilation**        | JIT (Just-In-Time) — compiles JS to machine code at runtime              |
 | **Garbage Collection** | Generational — uses Scavenger (young gen) + Mark-Sweep-Compact (old gen) |
-| **Key feature** | Ignition (interpreter) + TurboFan (optimizing compiler) pipeline |
+| **Key feature**        | Ignition (interpreter) + TurboFan (optimizing compiler) pipeline         |
 
 > 💡 V8 is what makes JavaScript fast. Without V8, Node.js would need a separate interpreter. The fact that V8 compiles JS to machine code (not interpreted line-by-line) is why Node.js can compete with languages like Java and Go for server-side performance.
 
@@ -186,25 +187,25 @@ libuv is a **cross-platform C library** that provides Node.js with its **event l
 
 #### What libuv Provides
 
-| Feature | What It Does |
-| --- | --- |
-| **Event Loop** | The core mechanism that processes callbacks and keeps Node.js running |
-| **Async File I/O** | Non-blocking file system operations (read, write, stat, etc.) |
-| **Async Networking** | TCP/UDP sockets, DNS resolution |
-| **Thread Pool** | 4 threads (default) for operations that can't be truly async (e.g., file I/O, DNS) |
-| **Timers** | `setTimeout`, `setInterval`, `setImmediate` implementations |
-| **Child Processes** | Spawning and managing child processes |
-| **Cross-platform** | Abstracts OS differences (Windows IOCP, Linux epoll, macOS kqueue) |
+| Feature              | What It Does                                                                       |
+| -------------------- | ---------------------------------------------------------------------------------- |
+| **Event Loop**       | The core mechanism that processes callbacks and keeps Node.js running              |
+| **Async File I/O**   | Non-blocking file system operations (read, write, stat, etc.)                      |
+| **Async Networking** | TCP/UDP sockets, DNS resolution                                                    |
+| **Thread Pool**      | 4 threads (default) for operations that can't be truly async (e.g., file I/O, DNS) |
+| **Timers**           | `setTimeout`, `setInterval`, `setImmediate` implementations                        |
+| **Child Processes**  | Spawning and managing child processes                                              |
+| **Cross-platform**   | Abstracts OS differences (Windows IOCP, Linux epoll, macOS kqueue)                 |
 
 #### Key Facts About libuv
 
-| Aspect | Detail |
-| --- | --- |
-| **Written in** | C |
-| **Created for** | Node.js (now used by other projects too — Julia, Luvit, etc.) |
-| **Location in repo** | `deps/uv/` |
+| Aspect                       | Detail                                                                   |
+| ---------------------------- | ------------------------------------------------------------------------ |
+| **Written in**               | C                                                                        |
+| **Created for**              | Node.js (now used by other projects too — Julia, Luvit, etc.)            |
+| **Location in repo**         | `deps/uv/`                                                               |
 | **Default Thread Pool Size** | 4 threads (configurable via `UV_THREADPOOL_SIZE` env variable, max 1024) |
-| **Event Loop Model** | Single-threaded event loop + multi-threaded pool for blocking ops |
+| **Event Loop Model**         | Single-threaded event loop + multi-threaded pool for blocking ops        |
 
 > 💡 libuv is what makes Node.js **non-blocking**. JavaScript itself is single-threaded, but libuv uses OS-level async primitives and a thread pool behind the scenes, so your code never has to wait for I/O.
 
@@ -215,7 +216,7 @@ The bindings layer (`src/` directory) is written in **C++** and serves as the br
 ```
 JavaScript World                     C++ World
 ──────────────                       ──────────
-                                   
+
 fs.readFile()  ──────────────→  node_file.cc  ──→  uv_fs_read()
 http.createServer()  ─────────→  node_http.cc  ──→  uv_tcp_bind()
 crypto.createHash()  ─────────→  node_crypto.cc ──→  OpenSSL EVP_*
@@ -229,7 +230,7 @@ crypto.createHash()  ─────────→  node_crypto.cc ──→  O
 
 ```javascript
 // Inside lib/fs.js (simplified)
-const binding = internalBinding('fs'); // Loads src/node_file.cc
+const binding = internalBinding("fs"); // Loads src/node_file.cc
 
 function readFile(path, callback) {
   // ... validation ...
@@ -242,14 +243,14 @@ function readFile(path, callback) {
 
 ### Common Mistakes
 
-| Mistake | Why It's Wrong |
-| --- | --- |
-| "Node.js is a programming language" | ❌ Node.js is a **runtime environment**. The language is JavaScript. Node.js = V8 + libuv + bindings + standard library. |
-| "Node.js is written in JavaScript" | ❌ Node.js is primarily written in **C++ and C** (V8, libuv, bindings). Only the standard library (`lib/`) is JavaScript. |
-| "V8 interprets JavaScript line by line" | ❌ V8 **compiles** JavaScript to machine code using JIT (Just-In-Time) compilation, not interpretation. |
-| "Node.js is single-threaded so it can't do parallel work" | ❌ The **event loop** is single-threaded, but libuv's **thread pool** (4 threads by default) handles blocking operations in parallel. |
-| "libuv is part of V8" | ❌ V8 and libuv are completely **separate** projects. V8 handles JavaScript execution; libuv handles async I/O and the event loop. |
-| "`lib/` and `src/` contain the same code" | ❌ `lib/` contains **JavaScript** (the API you use). `src/` contains **C++** (the bindings that call system-level operations). They work together but are different layers. |
+| Mistake                                                   | Why It's Wrong                                                                                                                                                              |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "Node.js is a programming language"                       | ❌ Node.js is a **runtime environment**. The language is JavaScript. Node.js = V8 + libuv + bindings + standard library.                                                    |
+| "Node.js is written in JavaScript"                        | ❌ Node.js is primarily written in **C++ and C** (V8, libuv, bindings). Only the standard library (`lib/`) is JavaScript.                                                   |
+| "V8 interprets JavaScript line by line"                   | ❌ V8 **compiles** JavaScript to machine code using JIT (Just-In-Time) compilation, not interpretation.                                                                     |
+| "Node.js is single-threaded so it can't do parallel work" | ❌ The **event loop** is single-threaded, but libuv's **thread pool** (4 threads by default) handles blocking operations in parallel.                                       |
+| "libuv is part of V8"                                     | ❌ V8 and libuv are completely **separate** projects. V8 handles JavaScript execution; libuv handles async I/O and the event loop.                                          |
+| "`lib/` and `src/` contain the same code"                 | ❌ `lib/` contains **JavaScript** (the API you use). `src/` contains **C++** (the bindings that call system-level operations). They work together but are different layers. |
 
 <div style="font-size: 22px; color: red">
 <details>
@@ -304,8 +305,8 @@ function readFile(path, callback) {
 
 <div align="center">
 
-|                                           ← Previous                                            | [⬆ Back to TOC](../README.md#part-2) |                                          Next →                                          |
-| :---------------------------------------------------------------------------------------------: | :-----------------------------------: | :--------------------------------------------------------------------------------------: |
-| [Chapter 4: module.exports & require](../S1%2004%20-%20module.export%20%26%20require/Readme.md) |                                       | [Chapter 6: libuv & async IO](../S1%2006%20-%20libuv%20%26%20async%20IO/Readme.md) |
+|                                           ← Previous                                            | [⬆ Back to TOC](../README.md#part-2) |                                       Next →                                       |
+| :---------------------------------------------------------------------------------------------: | :----------------------------------: | :--------------------------------------------------------------------------------: |
+| [Chapter 4: module.exports & require](../S1%2004%20-%20module.export%20%26%20require/Readme.md) |                                      | [Chapter 6: libuv & async IO](../S1%2006%20-%20libuv%20%26%20async%20IO/Readme.md) |
 
 </div>
