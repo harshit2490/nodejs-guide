@@ -1,8 +1,8 @@
 <div align="center">
 
 |                                    ← Previous                                    | [⬆ Back to TOC](../README.md#part-1) |                                             Next →                                             |
-| :------------------------------------------------------------------------------: | :------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [Chapter 2: JS on the Server](../S1%2002%20-%20JS%20on%20the%20Server/Readme.md) |                                        | [Chapter 4: module.export & require](../S1%2004%20-%20module.export%20%26%20require/Readme.md) |
+| :------------------------------------------------------------------------------: | :----------------------------------: | :--------------------------------------------------------------------------------------------: |
+| [Chapter 2: JS on the Server](../S1%2002%20-%20JS%20on%20the%20Server/Readme.md) |                                      | [Chapter 4: module.export & require](../S1%2004%20-%20module.export%20%26%20require/Readme.md) |
 
 </div>
 
@@ -11,6 +11,7 @@
 # Chapter 3 — Writing First Code &nbsp;
 
 > **Season 1** | Part I — Node.js Fundamentals & Modules
+> [🎬Link](https://namastedev.com/learn/namaste-node/lets-write-code)
 
 ---
 
@@ -399,7 +400,7 @@ node args.js Harshit 25
 <div align="center">
 
 |                                    ← Previous                                    | [⬆ Back to TOC](../README.md#part-1) |                                             Next →                                             |
-| :------------------------------------------------------------------------------: | :------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [Chapter 2: JS on the Server](../S1%2002%20-%20JS%20on%20the%20Server/Readme.md) |                                        | [Chapter 4: module.export & require](../S1%2004%20-%20module.export%20%26%20require/Readme.md) |
+| :------------------------------------------------------------------------------: | :----------------------------------: | :--------------------------------------------------------------------------------------------: |
+| [Chapter 2: JS on the Server](../S1%2002%20-%20JS%20on%20the%20Server/Readme.md) |                                      | [Chapter 4: module.export & require](../S1%2004%20-%20module.export%20%26%20require/Readme.md) |
 
 </div>
