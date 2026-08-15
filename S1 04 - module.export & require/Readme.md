@@ -11,6 +11,7 @@
 # Chapter 4 — module.exports & require &nbsp;
 
 > **Season 1** | Part I — Node.js Fundamentals & Modules
+> [🎬Link](https://namastedev.com/learn/namaste-node/module_export-require)
 
 ---
 
@@ -24,7 +25,7 @@ This is the **CommonJS (CJS)** module system — Node.js's original and default 
 
 ### How It Works
 
-#### The Module Wrapper Function (IIFE - Immediately Invoked Function Expression)
+#### The Module Wrapper Function (IIFE)
 
 Before executing your code, Node.js **wraps every file** in a function called the **Module Wrapper**:
 
