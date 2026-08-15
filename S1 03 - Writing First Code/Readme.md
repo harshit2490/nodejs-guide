@@ -205,15 +205,15 @@ Press `Tab` in the REPL to auto-complete:
 
 ##### REPL vs Browser Console
 
-| Feature                  | Browser Console         | Node.js REPL         |
-| ------------------------ | ----------------------- | -------------------- |
+| Feature                  | Browser Console          | Node.js REPL         |
+| ------------------------ | ------------------------ | -------------------- |
 | **DOM access**           | ✅ `document`, `window` | ❌ Not available     |
 | **File system**          | ❌ Sandboxed            | ✅ `require("fs")`   |
 | **Multi-line editor**    | ✅ Shift+Enter          | ✅ `.editor` command |
 | **Save session**         | ❌ No                   | ✅ `.save filename`  |
 | **Last result variable** | ✅ `$_`                 | ✅ `_`               |
 | **Tab completion**       | ✅ Yes                  | ✅ Yes               |
-| **Exit**                 | Close browser tab       | `.exit` or `Ctrl+D`  |
+| **Exit**                 | Close browser tab        | `.exit` or `Ctrl+D`  |
 
 #### The `console` Object — Beyond `console.log`
 
@@ -284,13 +284,13 @@ Node Version: v20.11.0
 Current Directory: C:\Users\harshit\projects
 ⚠️  This is a warning (goes to stderr)
 ❌ This is an error (goes to stderr)
-┌─────────┬─────────┬──────────────────────────┬────────────┐
-│ (index) │ chapter │          title           │   status   │
-├─────────┼─────────┼──────────────────────────┼────────────┤
-│    0    │    1    │ 'Introduction to NodeJs'  │  '✅ Done'  │
-│    1    │    2    │ 'JS on the Server'        │  '✅ Done'  │
+┌─────────┬─────────┬───────────────────────────┬──────────────┐
+│ (index) │ chapter │          title            │   status     │
+├─────────┼─────────┼───────────────────────────┼──────────────┤
+│    0    │    1    │ 'Introduction to NodeJs'  │ '✅ Done'   │
+│    1    │    2    │ 'JS on the Server'        │ '✅ Done'   │
 │    2    │    3    │ 'Writing First Code'      │ '🔄 Current'│
-└─────────┴─────────┴──────────────────────────┴────────────┘
+└─────────┴─────────┴───────────────────────────┴──────────────┘
 loop-timer: 5.123ms
 Sum of 1 to 999,999: 499999500000
 iteration: 1
