@@ -1,8 +1,8 @@
 <div align="center">
 
 | ← Previous | [⬆ Back to TOC](../README.md#part-1) |                                      Next →                                      |
-| :--------: | :------------------------------------: | :------------------------------------------------------------------------------: |
-|     —      |                                        | [Chapter 2: JS on the Server](../S1%2002%20-%20JS%20on%20the%20Server/Readme.md) |
+| :--------: | :----------------------------------: | :------------------------------------------------------------------------------: |
+|     —      |                                      | [Chapter 2: JS on the Server](../S1%2002%20-%20JS%20on%20the%20Server/Readme.md) |
 
 </div>
 
@@ -11,6 +11,7 @@
 # Chapter 1 — Introduction to Node.js &nbsp;
 
 > **Season 1** | Part I — Node.js Fundamentals & Modules
+> [🎬Link](https://namastedev.com/learn/namaste-node/introduction-to-nodejs)
 
 ---
 
@@ -278,7 +279,7 @@ console.log("3 — End");
 <div align="center">
 
 | ← Previous | [⬆ Back to TOC](../README.md#part-1) |                                      Next →                                      |
-| :--------: | :------------------------------------: | :------------------------------------------------------------------------------: |
-|     —      |                                        | [Chapter 2: JS on the Server](../S1%2002%20-%20JS%20on%20the%20Server/Readme.md) |
+| :--------: | :----------------------------------: | :------------------------------------------------------------------------------: |
+|     —      |                                      | [Chapter 2: JS on the Server](../S1%2002%20-%20JS%20on%20the%20Server/Readme.md) |
 
 </div>
