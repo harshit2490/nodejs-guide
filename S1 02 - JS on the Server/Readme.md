@@ -1,8 +1,8 @@
 <div align="center">
 
 |                                         ← Previous                                         | [⬆ Back to TOC](../README.md#part-1) |                                       Next →                                       |
-| :----------------------------------------------------------------------------------------: | :------------------------------------: | :--------------------------------------------------------------------------------: |
-| [Chapter 1: Introduction to NodeJs](../S1%2001%20-%20Introduction%20to%20NodeJs/Readme.md) |                                        | [Chapter 3: Writing First Code](../S1%2003%20-%20Writing%20First%20Code/Readme.md) |
+| :----------------------------------------------------------------------------------------: | :----------------------------------: | :--------------------------------------------------------------------------------: |
+| [Chapter 1: Introduction to NodeJs](../S1%2001%20-%20Introduction%20to%20NodeJs/Readme.md) |                                      | [Chapter 3: Writing First Code](../S1%2003%20-%20Writing%20First%20Code/Readme.md) |
 
 </div>
 
@@ -11,6 +11,7 @@
 # Chapter 2 — JS on the Server &nbsp;
 
 > **Season 1** | Part I — Node.js Fundamentals & Modules
+> [🎬Link](https://namastedev.com/learn/namaste-node/js-on-server)
 
 ---
 
@@ -329,7 +330,7 @@ node server.js
 <div align="center">
 
 |                                         ← Previous                                         | [⬆ Back to TOC](../README.md#part-1) |                                       Next →                                       |
-| :----------------------------------------------------------------------------------------: | :------------------------------------: | :--------------------------------------------------------------------------------: |
-| [Chapter 1: Introduction to NodeJs](../S1%2001%20-%20Introduction%20to%20NodeJs/Readme.md) |                                        | [Chapter 3: Writing First Code](../S1%2003%20-%20Writing%20First%20Code/Readme.md) |
+| :----------------------------------------------------------------------------------------: | :----------------------------------: | :--------------------------------------------------------------------------------: |
+| [Chapter 1: Introduction to NodeJs](../S1%2001%20-%20Introduction%20to%20NodeJs/Readme.md) |                                      | [Chapter 3: Writing First Code](../S1%2003%20-%20Writing%20First%20Code/Readme.md) |
 
 </div>
