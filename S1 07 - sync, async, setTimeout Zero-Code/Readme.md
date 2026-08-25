@@ -490,6 +490,8 @@ Timer 2
 | [`setTimeoutZero.js`](./Code/setTimeoutZero.js) | setTimeout(0) trust issues — proves 0ms doesn’t mean immediate                         |
 | [`file.txt`](./Code/file.txt)                   | Sample file for read operations — "Hi i am a Nodejs Developer"                         |
 
+---
+
 ### Common Mistakes
 
 | Mistake                                                        | Why It's Wrong                                                                                                                                  |
