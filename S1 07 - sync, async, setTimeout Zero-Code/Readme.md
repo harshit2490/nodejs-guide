@@ -549,8 +549,8 @@ Timer 2
 - Synchronous code **always** runs before any async callbacks — the event loop waits for the call stack to clear
 - **`setTimeout(fn, 0)` does NOT mean "run immediately"** — it means "run after all sync code finishes and the event loop reaches the timer phase" (the "trust issue")
 - The **callback queue** holds completed async callbacks; the **event loop** moves them to the call stack only when it’s empty
-- `readFileSync` returns data directly (blocking); `readFile` uses a callback (non-blocking) — **never** pass a callback to `readFileSync`
-- `pbkdf2Sync` blocks the event loop; `pbkdf2` delegates to the thread pool — always use async in servers
+- **`readFileSync`** returns data directly (blocking); **`readFile`** uses a callback (non-blocking) — **never** pass a callback to `readFileSync`
+- **`pbkdf2Sync`** blocks the event loop; **`pbkdf2`** delegates to the thread pool — always use async in servers
 - Async callbacks execute in the order their **operations complete**, not registration order
 - **Microtasks** (Promises, `process.nextTick`) always run before **macrotasks** (`setTimeout`, I/O callbacks)
 - `setTimeout` guarantees **at least** N milliseconds, not exactly N — the call stack might delay it
