@@ -40,6 +40,59 @@ This chapter explains the **event loop** — the core mechanism that makes Node.
 | 5   | **Check**             | `setImmediate()` callbacks                       | `setImmediate()`                |
 | 6   | **Close Callbacks**   | Cleanup callbacks (`socket.on('close')`)         | `.on('close')`                  |
 
+#### Inner Event Loop ASCII Flow (with Call Stack & Microtasks)
+
+```
+        ┌──────────────────────────────────────────────────────────┐
+        │                   CALL STACK (V8)                        │
+        │  Executes all synchronous code first, then empties out   │
+        └───────────────────────────┬──────────────────────────────┘
+                                    │
+                           Call Stack Empty? --> No --> Keep executing sync code
+                                    │
+                                   Yes
+                                    │
+                                    ▼
+          ┌─────────────── EVENT LOOP BEGINS ───────────────────┐
+          │                       ↻ ↻                          │
+          │                    ___________________________      │
+          │                   |                           |     │
+          │                   ▼                           |     │
+          │   process.nextTick() ──► Promise callbacks    |     │
+          │                   |                           |     │
+          │                   ▼                           ▲     │
+          │                 Timer                         |     │
+          │        [setTimeout/setInterval]               |     │
+          │                   |                           |     │
+          │                   ▼                           |     │
+          │   process.nextTick() ──► Promise callbacks    |     │
+          │                   |                           |     │
+          │                   ▼                           ▲     │
+          │                  Poll                         |     │
+          │   [I/O Callbacks, fs, crypto, http, data]     |     │
+          │                   |                           |     │
+          │                   ▼                           |     │
+          │   process.nextTick() ──► Promise callbacks    |     │
+          │                   |                           |     │
+          │                   ▼                           ▲     │
+          │                 Check                         |     │
+          │             [setImmediate]                    |     │
+          │                   |                           |     │
+          │                   ▼                           |     │
+          │   process.nextTick() ──► Promise callbacks    |     │
+          │                   |                           |     │
+          │                   ▼                           ▲     │
+          │                Close                          |     │
+          │          [socket.on("close")]                 |     │
+          │                   |                           |     │
+          │                   ▼___________________________|     │
+          │                                                     │
+          └─────────────────────────────────────────────────────┘
+
+  Flow: Call Stack (sync) → nextTick → Promises → Timer → nextTick → Promises
+        → Poll → nextTick → Promises → Check → nextTick → Promises → Close → ↻
+```
+
 ---
 
 ## Microtask Queues — The Priority Lane
