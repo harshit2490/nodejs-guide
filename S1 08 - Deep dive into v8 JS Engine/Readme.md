@@ -244,7 +244,7 @@ const user3 = { age: 28, name: "Priya" };
 
 > _V8 uses **generational GC** — most objects die young, so it optimizes for that._
 
-![V8 Execution Phases](./v8_phases.png)
+![V8 Execution Phases](./v8_phases_diagram.png)
 
 ```
 V8 Heap Memory:
