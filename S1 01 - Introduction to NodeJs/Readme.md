@@ -15,8 +15,6 @@
 
 ---
 
-### Development History of Node.js
-
 ![](./History%20of%20Nodejs.png)
 
 #### Timeline
