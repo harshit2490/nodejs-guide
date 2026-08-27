@@ -15,6 +15,26 @@
 
 ---
 
+### Development History of Node.js
+
+![](./History%20of%20Nodejs.png)
+
+#### Timeline
+
+| Year | Event                                                                                                    |
+| ---- | -------------------------------------------------------------------------------------------------------- |
+| 2009 | **Ryan Dahl** creates Node.js. Initially experiments with **SpiderMonkey**, then adopts **V8 engine**    |
+| 2009 | Project originally named **web.js**, renamed to **Node.js** to reflect broader potential                 |
+| 2009 | **Joyent** (technology company) sponsors and supports Node.js development                                |
+| 2010 | **NPM** (Node Package Manager) is introduced — developed by **Isaac Z. Schlueter**                       |
+| 2011 | Microsoft collaborates to bring Node.js and NPM to **Windows** (initially macOS/Linux only)              |
+| 2012 | Ryan Dahl steps down; **Isaac Z. Schlueter** (NPM creator) takes over Node.js leadership                 |
+| 2014 | **Fedor Indutny** forks Node.js → creates **io.js** due to governance disagreements                      |
+| 2015 | Node.js and io.js communities reunify under the **Node.js Foundation**                                   |
+| 2019 | **JS Foundation** + **Node.js Foundation** merge → **OpenJS Foundation** for community-driven governance |
+
+---
+
 ### What is Node.js?
 
 **Node.js is a cross-platform, open-source JavaScript runtime environment** that executes JavaScript code outside of a web browser. It is built on Chrome's **V8 JavaScript engine** — the same engine that powers Google Chrome — and extended with **libuv**, a C library for asynchronous I/O, enabling Node.js to perform file system operations, networking, and more without blocking the main thread.
@@ -39,9 +59,11 @@ Together, they give JavaScript the ability to:
 - Interact with **databases**, **operating system**, and **network**
 - Run **asynchronous, non-blocking** operations efficiently
 
+---
+
 #### Key Features
 
-##### 1. Event-Driven Architecture
+### 1. Event-Driven Architecture
 
 Node.js follows an **event-driven architecture**, where the flow of the program is determined by events (user actions, sensor outputs, messages from other programs, etc.). Instead of waiting for tasks to complete sequentially, Node.js registers callbacks and moves on — responding when the event completes.
 
@@ -59,7 +81,9 @@ Node.js follows an **event-driven architecture**, where the flow of the program 
  (execute)   (delegate to libuv)
 ```
 
-##### 2. Non-Blocking I/O (Asynchronous I/O)
+---
+
+### 2. Non-Blocking I/O (Asynchronous I/O)
 
 Traditional servers (like Apache) use a **blocking model** — each request occupies a thread, and while waiting for I/O (database query, file read), that thread sits idle.
 
@@ -70,9 +94,13 @@ Node.js uses **non-blocking I/O** — it delegates I/O tasks to the OS/libuv and
 | **Blocking (Apache)**   | Thread waits until I/O completes   | One thread per connection  |
 | **Non-Blocking (Node)** | Delegates I/O, continues execution | Single thread + Event Loop |
 
-##### 3. Single-Threaded (with Multi-Threaded Support)
+---
+
+### 3. Single-Threaded (with Multi-Threaded Support)
 
 Node.js runs JavaScript on a **single thread** (the Event Loop), but offloads heavy operations (crypto, file I/O, DNS lookups) to a **thread pool** managed by libuv (default 4 threads).
+
+---
 
 #### Node.js vs Browser JavaScript
 
@@ -85,22 +113,6 @@ Node.js runs JavaScript on a **single thread** (the Event Loop), but offloads he
 | **Module System**      | ES Modules (`import`/`export`)      | CommonJS (`require`) + ES Modules       |
 | **HTTP Server**        | ❌ Cannot create servers            | ✅ Built-in `http` module               |
 | **Use Case**           | Frontend, UI interactions           | Backend, APIs, CLI tools, microservices |
-
-### Development History of Node.js
-
-#### Timeline
-
-| Year | Event                                                                                                    |
-| ---- | -------------------------------------------------------------------------------------------------------- |
-| 2009 | **Ryan Dahl** creates Node.js. Initially experiments with **SpiderMonkey**, then adopts **V8 engine**    |
-| 2009 | Project originally named **web.js**, renamed to **Node.js** to reflect broader potential                 |
-| 2009 | **Joyent** (technology company) sponsors and supports Node.js development                                |
-| 2010 | **NPM** (Node Package Manager) is introduced — developed by **Isaac Z. Schlueter**                       |
-| 2011 | Microsoft collaborates to bring Node.js and NPM to **Windows** (initially macOS/Linux only)              |
-| 2012 | Ryan Dahl steps down; **Isaac Z. Schlueter** (NPM creator) takes over Node.js leadership                 |
-| 2014 | **Fedor Indutny** forks Node.js → creates **io.js** due to governance disagreements                      |
-| 2015 | Node.js and io.js communities reunify under the **Node.js Foundation**                                   |
-| 2019 | **JS Foundation** + **Node.js Foundation** merge → **OpenJS Foundation** for community-driven governance |
 
 #### Why Was Node.js Created?
 
@@ -212,6 +224,8 @@ console.log("3 — End");
 ```
 
 > ⚠️ Notice **"3 — End"** prints before **"2 — File content"**. This is non-blocking I/O in action — Node.js doesn't wait for the file to be read. It delegates the task and moves on.
+
+---
 
 ### Common Mistakes
 
