@@ -15,15 +15,29 @@
 
 ---
 
+<a id="key-topics"></a>
+
+### Topics Covering
+
+> 1. [The Big Picture: V8 Engine vs libuv Roles](#topic-1)
+> 2. [Synchronous Code — Call Stack in Action](#topic-2)
+> 3. [Blocking Code — `crypto.pbkdf2Sync` vs `crypto.pbkdf2`](#topic-3)
+> 4. [Asynchronous Code — V8 + libuv Working Together](#topic-4)
+> 5. [`setTimeout(fn, 0)` — The Zero-Delay Trap & Trust Issues](#topic-5)
+> 6. [`readFileSync` vs `readFile` — The Common Mistake](#topic-6)
+> 7. [Execution Order Prediction & Practice Code Files](#topic-7)
+
+---
+
 ### What is This Chapter About?
 
 This chapter dives into the **execution mechanics** of synchronous and asynchronous code in Node.js — specifically how the **call stack**, **V8 engine**, **libuv**, and the **callback queue** work together. The star of this chapter is `setTimeout(fn, 0)` — which reveals that even a 0ms timer doesn’t execute immediately.
 
 > 💡 Understanding this execution flow is one of the **most asked interview topics** in Node.js and JavaScript.
 
-### How It Works
+<a id="topic-1"></a>
 
-#### The Big Picture: Who Does What?
+## 1. [The Big Picture: V8 Engine vs libuv Roles](#key-topics)
 
 When Node.js executes your code, two systems work together:
 
@@ -54,7 +68,9 @@ flowchart LR
 
 ---
 
-## 💡Synchronous Code — Call Stack in Action
+<a id="topic-2"></a>
+
+## 2. [Synchronous Code — Call Stack in Action](#key-topics)
 
 _V8 executes synchronous code using the **call stack** — a LIFO (Last In, First Out) data structure._
 _Every line executes **sequentially**. The call stack never has more than **one function executing** at a time (single-threaded)._
@@ -120,7 +136,9 @@ Step 6: Program ends
 
 <br/>
 
-## 💡Blocking Code — `crypto.pbkdf2Sync` vs `crypto.pbkdf2`
+<a id="topic-3"></a>
+
+## 3. [Blocking Code — `crypto.pbkdf2Sync` vs `crypto.pbkdf2`](#key-topics)
 
 _This example demonstrates how **synchronous crypto** blocks the main thread while **asynchronous crypto** doesn’t:_
 
@@ -184,7 +202,9 @@ Below is the asynchronous key of your password
 
 <br/>
 
-## 💡Asynchronous Code — V8 + libuv Working Together
+<a id="topic-4"></a>
+
+## 4. [Asynchronous Code — V8 + libuv Working Together](#key-topics)
 
 _This file mixes **synchronous and asynchronous operations** in one script — the best way to understand execution order:_
 
@@ -273,7 +293,9 @@ Phase 2 — libuv callbacks fire (order depends on completion time):
 
 <br/>
 
-## 💡`setTimeout(fn, 0)` — The Zero-Delay Trap & Trust Issues
+<a id="topic-5"></a>
+
+## 5. [`setTimeout(fn, 0)` — The Zero-Delay Trap & Trust Issues](#key-topics)
 
 > 📁 Practice file: [`setTimeoutZero.js`](./Code/setTimeoutZero.js)
 
@@ -389,7 +411,9 @@ sequenceDiagram
 
 <br/>
 
-## 💡`readFileSync` vs `readFile` — The Common Mistake
+<a id="topic-6"></a>
+
+## 6. [`readFileSync` vs `readFile` — The Common Mistake](#key-topics)
 
 ### ❌ Wrong: Passing a callback to `readFileSync`
 
@@ -437,6 +461,10 @@ fs.readFile("./file.txt", "utf-8", (err, data) => {
 | `readFile()`     | ❌ No     | ❌ Via callback | ✅ Yes         | `(err, data)` callback arg |
 
 ---
+
+<a id="topic-7"></a>
+
+## 7. [Execution Order Prediction & Practice Code Files](#key-topics)
 
 ### Execution Order Prediction — Interview Pattern
 
@@ -489,8 +517,6 @@ Timer 2
 | [`blocking.js`](./Code/blocking.js)             | Blocking vs non-blocking crypto — `pbkdf2Sync` (blocks) vs `pbkdf2` (async)            |
 | [`setTimeoutZero.js`](./Code/setTimeoutZero.js) | setTimeout(0) trust issues — proves 0ms doesn’t mean immediate                         |
 | [`file.txt`](./Code/file.txt)                   | Sample file for read operations — "Hi i am a Nodejs Developer"                         |
-
----
 
 ### Common Mistakes
 
@@ -549,8 +575,8 @@ Timer 2
 - Synchronous code **always** runs before any async callbacks — the event loop waits for the call stack to clear
 - **`setTimeout(fn, 0)` does NOT mean "run immediately"** — it means "run after all sync code finishes and the event loop reaches the timer phase" (the "trust issue")
 - The **callback queue** holds completed async callbacks; the **event loop** moves them to the call stack only when it’s empty
-- **`readFileSync`** returns data directly (blocking); **`readFile`** uses a callback (non-blocking) — **never** pass a callback to `readFileSync`
-- **`pbkdf2Sync`** blocks the event loop; **`pbkdf2`** delegates to the thread pool — always use async in servers
+- `readFileSync` returns data directly (blocking); `readFile` uses a callback (non-blocking) — **never** pass a callback to `readFileSync`
+- `pbkdf2Sync` blocks the event loop; `pbkdf2` delegates to the thread pool — always use async in servers
 - Async callbacks execute in the order their **operations complete**, not registration order
 - **Microtasks** (Promises, `process.nextTick`) always run before **macrotasks** (`setTimeout`, I/O callbacks)
 - `setTimeout` guarantees **at least** N milliseconds, not exactly N — the call stack might delay it
