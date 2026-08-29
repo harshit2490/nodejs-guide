@@ -15,7 +15,23 @@
 
 ---
 
-### What is libuv?
+<a id="key-topics"></a>
+
+### Topics Covering
+
+> 1. [What is libuv & Where It Fits in Node.js Architecture](#topic-1)
+> 2. [What libuv Provides](#topic-2)
+> 3. [Synchronous vs Asynchronous — The Core Concept](#topic-3)
+> 4. [Blocking vs Non-Blocking I/O](#topic-4)
+> 5. [How libuv Handles Async Operations (OS Primitives vs Thread Pool)](#topic-5)
+> 6. [Event-Driven Architecture & Event Loop Overview](#topic-6)
+> 7. [Code Examples: Sync vs Async, Event-Driven Server & Event Loop](#topic-7)
+
+---
+
+<a id="topic-1"></a>
+
+## 1. [What is libuv & Where It Fits in Node.js Architecture](#key-topics)
 
 **libuv** is a cross-platform **C library** that provides Node.js with its **event loop**, **asynchronous I/O**, **thread pool**, and **cross-platform abstractions**. It was originally written by **Ben Noordhuis** specifically for Node.js, but is now used by other projects (Julia, Luvit, Neovim, etc.).
 
@@ -23,9 +39,7 @@ libuv doesn't perform the actual I/O tasks itself — it **manages and delegates
 
 > 💡 **V8** handles JavaScript execution. **libuv** handles everything else — file system, networking, timers, DNS, child processes, and the event loop. Together, they make Node.js work.
 
-### How It Works
-
-#### Where libuv Fits in the Node.js Architecture
+### Where libuv Fits in the Node.js Architecture
 
 ```mermaid
 graph TB
@@ -54,7 +68,9 @@ graph TB
     E --> F
 ```
 
-#### What libuv Provides
+<a id="topic-2"></a>
+
+## 2. [What libuv Provides](#key-topics)
 
 | Feature              | What It Does                                                                                            |
 | -------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -68,7 +84,9 @@ graph TB
 | **Signal Handling**  | Cross-platform signal handling (SIGINT, SIGTERM, etc.)                                                  |
 | **Cross-platform**   | Abstracts OS differences — one API for Windows, Linux, macOS                                            |
 
-#### Synchronous vs Asynchronous — The Core Concept
+<a id="topic-3"></a>
+
+## 3. [Synchronous vs Asynchronous — The Core Concept](#key-topics)
 
 ##### Synchronous (Blocking)
 
@@ -107,7 +125,9 @@ Total: Much shorter! Tasks overlap.
 | **Use case**        | Simple scripts, startup config | Servers, APIs, real-time apps      |
 | **Node.js API**     | `fs.readFileSync()`            | `fs.readFile()`                    |
 
-#### Blocking vs Non-Blocking I/O
+<a id="topic-4"></a>
+
+## 4. [Blocking vs Non-Blocking I/O](#key-topics)
 
 **I/O** (Input/Output) refers to operations that interact with systems **outside your program** — file system, network, database, terminal, etc. These are inherently slow compared to CPU operations.
 
@@ -175,7 +195,9 @@ Timeline:
 
 > ⚠️ Notice **"3 — End"** prints before **"2 — File read complete"**. This is the essence of non-blocking I/O — Node.js doesn't wait. It delegates the file read to libuv and moves on.
 
-#### How libuv Handles Async Operations
+<a id="topic-5"></a>
+
+## 5. [How libuv Handles Async Operations (OS Primitives vs Thread Pool)](#key-topics)
 
 libuv uses **two different mechanisms** depending on the type of operation:
 
@@ -229,7 +251,9 @@ Your Code → libuv → Thread Pool (worker thread picks it up)
 
 > 💡 The thread pool has **4 threads** by default. You can increase it (up to 1024) with the `UV_THREADPOOL_SIZE` environment variable. Thread pool details are covered in depth in **Chapter 10**.
 
-#### Event-Driven Architecture
+<a id="topic-6"></a>
+
+## 6. [Event-Driven Architecture & Event Loop Overview](#key-topics)
 
 Node.js follows an **event-driven architecture** — the flow of the program is determined by **events** (I/O completion, timers firing, signals received) rather than sequential instruction execution.
 
@@ -264,13 +288,13 @@ emitter.on("data", (payload) => {
 });
 
 // Later, emit the event — the callback fires
-emitter.emit("data", { id: 1, name: "Akshay" });
-// Output: Data received: { id: 1, name: 'Akshay' }
+emitter.emit("data", { id: 1, name: "Harshit" });
+// Output: Data received: { id: 1, name: 'Harshit' }
 ```
 
 > 💡 The **Event Loop** is the mechanism that orchestrates this entire event-driven model. It continuously checks for pending events and executes their callbacks. The event loop phases are covered in depth in **Chapter 9**.
 
-#### The Event Loop — Overview
+### The Event Loop — Overview
 
 The event loop is libuv's **core mechanism**. It keeps Node.js running as long as there are pending operations:
 
@@ -299,7 +323,9 @@ The event loop is libuv's **core mechanism**. It keeps Node.js running as long a
 
 > ⚠️ This is an introductory overview. The **detailed phases, microtask queues, and execution order** are covered in **Chapter 9 — libuv and Event Loop**.
 
-### Code Example
+<a id="topic-7"></a>
+
+## 7. [Code Examples: Sync vs Async, Event-Driven Server & Event Loop](#key-topics)
 
 #### Sync vs Async — Side by Side
 
@@ -322,6 +348,17 @@ console.log("Sync: Hash generated"); // Block
 
 console.timeEnd("sync-total");
 // sync-total: ~800ms (all tasks run sequentially)
+```
+
+**Output:**
+
+```
+=== Sync Demo ===
+Sync: File 1 read
+Sync: File 2 read
+Sync: Hash generated
+sync-total: 823ms
+
 ```
 
 ```javascript
@@ -349,12 +386,6 @@ console.log("Async: All tasks delegated, moving on!");
 **Output:**
 
 ```
-=== Sync Demo ===
-Sync: File 1 read
-Sync: File 2 read
-Sync: Hash generated
-sync-total: 823ms
-
 === Async Demo ===
 Async: All tasks delegated, moving on!
 Async: File 1 read
