@@ -15,7 +15,23 @@
 
 ---
 
-### Why Explore the Node.js Source Code?
+<a id="key-topics"></a>
+
+### Topics Covering
+
+> 1. [Why Explore the Node.js Source Code?](#topic-1)
+> 2. [How Node.js is Built — Architecture Overview & Execution Flow](#topic-2)
+> 3. [The Node.js GitHub Repository Structure & Key Directories](#topic-3)
+> 4. [Tracing a Module: From `require("fs")` to C++ Layer](#topic-4)
+> 5. [V8 — The JavaScript Engine](#topic-5)
+> 6. [libuv — The Async I/O Engine](#topic-6)
+> 7. [Node.js C++ Bindings — The Glue Layer](#topic-7)
+
+---
+
+<a id="topic-1"></a>
+
+## 1. [Why Explore the Node.js Source Code?](#key-topics)
 
 Node.js is **open source** — its entire codebase lives on GitHub at [github.com/nodejs/node](https://github.com/nodejs/node). Understanding the repo structure helps you:
 
@@ -26,7 +42,9 @@ Node.js is **open source** — its entire codebase lives on GitHub at [github.co
 
 > 💡 Reading source code is one of the best ways to become a stronger developer. Node.js is a great starting point because it bridges JavaScript (a language you know) with C/C++ (the systems layer).
 
-### How Node.js is Built — Architecture Overview
+<a id="topic-2"></a>
+
+## 2. [How Node.js is Built — Architecture Overview & Execution Flow](#key-topics)
 
 Node.js is **not** a language or a framework — it's a **runtime environment** that lets you run JavaScript outside the browser. It's built by combining several powerful components:
 
@@ -82,7 +100,9 @@ callback(data) ←── ← ← ← ← ← ← ← ← ← ← ← ← ← ←
 
 > 💡 This is why Node.js is so fast — your JavaScript never directly touches the OS. V8 compiles it to machine code, and libuv handles all the I/O asynchronously so your code doesn't block.
 
-### The Node.js GitHub Repository Structure
+<a id="topic-3"></a>
+
+## 3. [The Node.js GitHub Repository Structure & Key Directories](#key-topics)
 
 The Node.js repo ([github.com/nodejs/node](https://github.com/nodejs/node)) is organized into clear directories. Here are the most important ones:
 
@@ -131,7 +151,9 @@ nodejs/node/
 | **`deps/openssl/`** | OpenSSL library                                                         | Handles all cryptographic operations — HTTPS, TLS, `crypto` module functionality.                                                              |
 | **`test/`**         | Thousands of test files                                                 | Node.js has an extensive test suite. Great for understanding expected behavior of any API.                                                     |
 
-#### Tracing a Module: From `require("fs")` to C++
+<a id="topic-4"></a>
+
+## 4. [Tracing a Module: From `require("fs")` to C++ Layer](#key-topics)
 
 When you write `const fs = require("fs")`, here's exactly what happens in the repo:
 
@@ -156,7 +178,9 @@ When you write `const fs = require("fs")`, here's exactly what happens in the re
 
 > 💡 **This is the key insight:** Every built-in module follows this pattern — **JS layer** (`lib/`) → **C++ bindings** (`src/`) → **libuv/V8** (`deps/`). Understanding this flow helps you debug and reason about Node.js at a much deeper level.
 
-### V8 — The JavaScript Engine
+<a id="topic-5"></a>
+
+## 5. [V8 — The JavaScript Engine](#key-topics)
 
 V8 is an open-source **JavaScript and WebAssembly engine** developed by Google. It's the same engine that powers **Google Chrome**.
 
@@ -181,7 +205,9 @@ V8 is an open-source **JavaScript and WebAssembly engine** developed by Google. 
 
 > 💡 V8 is what makes JavaScript fast. Without V8, Node.js would need a separate interpreter. The fact that V8 compiles JS to machine code (not interpreted line-by-line) is why Node.js can compete with languages like Java and Go for server-side performance.
 
-### libuv — The Async I/O Engine
+<a id="topic-6"></a>
+
+## 6. [libuv — The Async I/O Engine](#key-topics)
 
 libuv is a **cross-platform C library** that provides Node.js with its **event loop**, **asynchronous I/O**, and **thread pool**. It was originally written specifically for Node.js.
 
@@ -209,7 +235,9 @@ libuv is a **cross-platform C library** that provides Node.js with its **event l
 
 > 💡 libuv is what makes Node.js **non-blocking**. JavaScript itself is single-threaded, but libuv uses OS-level async primitives and a thread pool behind the scenes, so your code never has to wait for I/O.
 
-### Node.js Bindings — The Glue Layer
+<a id="topic-7"></a>
+
+## 7. [Node.js C++ Bindings — The Glue Layer](#key-topics)
 
 The bindings layer (`src/` directory) is written in **C++** and serves as the bridge between your JavaScript code and the C/C++ libraries (V8, libuv).
 
