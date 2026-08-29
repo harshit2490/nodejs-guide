@@ -15,15 +15,31 @@
 
 ---
 
+<a id="key-topics"></a>
+
+### Topics Covering
+
+> 1. [V8 Architecture — The Big Picture](#topic-1)
+> 2. [Phase 1: Parsing (Lexical Analysis, AST & Lazy Parsing)](#topic-2)
+> 3. [Phase 2: Ignition (Interpreter & Bytecode Generation)](#topic-3)
+> 4. [Phase 3: Profiling (Hotspot Detection)](#topic-4)
+> 5. [Phase 4: TurboFan (Optimizing Compiler & Deoptimization)](#topic-5)
+> 6. [JIT Compilation (Why JIT Beats AOT for JavaScript)](#topic-6)
+> 7. [Hidden Classes (Shapes) & Inline Caching (IC)](#topic-7)
+> 8. [Phase 5: Garbage Collection (Generational GC — Scavenger & Mark-Sweep)](#topic-8)
+> 9. [Phase 6: Optimization Killers — Patterns to Avoid](#topic-9)
+
+---
+
 ### What is This Chapter About?
 
 This chapter takes you **inside the V8 engine** — the heart of both Chrome and Node.js. You’ll learn how JavaScript goes from text to machine code, how V8 optimizes hot paths, and how it manages memory through garbage collection.
 
 > 💡 V8 is what makes JavaScript **competitive with C++ and Go** for server-side performance.
 
-### How It Works
+<a id="topic-1"></a>
 
-#### V8 Architecture — The Big Picture
+## 1. [V8 Architecture — The Big Picture](#key-topics)
 
 ![V8 Engine Architecture](./v8_architecture.png)
 
@@ -75,7 +91,9 @@ V8 Engine Architecture:
 
 ---
 
-### Phase 1: Parsing
+<a id="topic-2"></a>
+
+## 2. [Phase 1: Parsing (Lexical Analysis, AST & Lazy Parsing)](#key-topics)
 
 > V8 parses JavaScript in two stages:
 
@@ -110,7 +128,9 @@ graph TD
 
 ---
 
-### Phase 2: Ignition (Interpreter)
+<a id="topic-3"></a>
+
+## 3. [Phase 2: Ignition (Interpreter & Bytecode Generation)](#key-topics)
 
 > _The AST is passed to **Ignition**, V8’s interpreter. Ignition converts the AST into **bytecode** — a compact, intermediate representation that’s faster to execute than raw AST walking._
 
@@ -140,7 +160,9 @@ Return                       // Return result
 
 ---
 
-### Phase 3: Profiling (Hotspot Detection)
+<a id="topic-4"></a>
+
+## 4. [Phase 3: Profiling (Hotspot Detection)](#key-topics)
 
 > _As Ignition runs bytecode, it **profiles** the code — tracking call frequency and type information. Functions called many times are marked as **"hot"** and sent to TurboFan._
 
@@ -165,7 +187,9 @@ for (let i = 0; i < 10000; i++) {
 
 ---
 
-### Phase 4: TurboFan (Optimizing Compiler)
+<a id="topic-5"></a>
+
+## 5. [Phase 4: TurboFan (Optimizing Compiler & Deoptimization)](#key-topics)
 
 > _Takes hot bytecode and compiles it into **optimized machine code** using profiling data._
 
@@ -204,7 +228,9 @@ add("hello", "world"); // String! TurboFan's assumption BREAKS
 
 ---
 
-#### JIT Compilation (Why Not AOT?)
+<a id="topic-6"></a>
+
+## 6. [JIT Compilation (Why JIT Beats AOT for JavaScript)](#key-topics)
 
 V8 uses **JIT (Just-In-Time)** — compiles at runtime, not before execution.
 
@@ -217,7 +243,9 @@ V8 uses **JIT (Just-In-Time)** — compiles at runtime, not before execution.
 
 ---
 
-#### Hidden Classes & Inline Caching
+<a id="topic-7"></a>
+
+## 7. [Hidden Classes (Shapes) & Inline Caching (IC)](#key-topics)
 
 **Hidden Classes (Shapes)** — V8 assigns internal "maps" to objects with the same property structure for fast access:
 
@@ -240,11 +268,13 @@ const user3 = { age: 28, name: "Priya" };
 
 ---
 
-### Phase 5: Garbage Collection
+<a id="topic-8"></a>
+
+## 8. [Phase 5: Garbage Collection (Generational GC — Scavenger & Mark-Sweep)](#key-topics)
 
 > _V8 uses **generational GC** — most objects die young, so it optimizes for that._
 
-![V8 Execution Phases](./v8_phases_diagram.png)
+![V8 Execution Phases](./v8_phases.png)
 
 ```
 V8 Heap Memory:
@@ -271,7 +301,9 @@ V8 Heap Memory:
 
 ---
 
-### Phase-6: Optimization Killers — Patterns to Avoid
+<a id="topic-9"></a>
+
+## 9. [Phase 6: Optimization Killers — Patterns to Avoid](#key-topics)
 
 | Anti-Pattern              | Why It Kills Optimization                | Fix                               |
 | ------------------------- | ---------------------------------------- | --------------------------------- |
