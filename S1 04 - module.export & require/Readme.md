@@ -15,7 +15,23 @@
 
 ---
 
-### What is the Module System?
+<a id="key-topics"></a>
+
+### Topics Covering
+
+> 1. [What is the Module System?](#topic-1)
+> 2. [The Module Wrapper Function (IIFE)](#topic-2)
+> 3. [Three Types of Modules (Core, Local, Third-Party)](#topic-3)
+> 4. [The `require()` Resolution Algorithm](#topic-4)
+> 5. [Module Caching & Circular Dependencies](#topic-5)
+> 6. [CommonJS (CJS) vs ES Modules (ESM)](#topic-6)
+> 7. [Code Examples: CommonJS (`using-cjs/`) & ES Modules (`using-mjs/`)](#topic-7)
+
+---
+
+<a id="topic-1"></a>
+
+## 1. [What is the Module System?](#key-topics)
 
 In Node.js, every file is treated as a **separate module**. Variables, functions, and classes defined in one file are **private** by default — they cannot be accessed from another file unless explicitly **exported**. The `module.exports` object is the mechanism to expose code, and the `require()` function is the mechanism to import it.
 
@@ -23,9 +39,9 @@ This is the **CommonJS (CJS)** module system — Node.js's original and default 
 
 > 💡 Modules solve the problem of **global namespace pollution**. Without modules, all variables would leak into the global scope — exactly what happens with `<script>` tags in browsers without ES Modules.
 
-### How It Works
+<a id="topic-2"></a>
 
-#### The Module Wrapper Function (IIFE)
+## 2. [The Module Wrapper Function (IIFE)](#key-topics)
 
 Before executing your code, Node.js **wraps every file** in a function called the **Module Wrapper**:
 
@@ -62,7 +78,9 @@ console.log(exports === module.exports); // true (initially!)
 
 > 💡 This IIFE is why top-level variables in Node.js are **not global** — they're scoped to the wrapper function. This is fundamentally different from browser `<script>` tags where `var` leaks to `window`.
 
-#### Three Types of Modules
+<a id="topic-3"></a>
+
+## 3. [Three Types of Modules (Core, Local, Third-Party)](#key-topics)
 
 | Type              | How to Require                | Example                            | Where It Lives                      |
 | ----------------- | ----------------------------- | ---------------------------------- | ----------------------------------- |
@@ -84,7 +102,9 @@ const express = require("express"); // node_modules/express
 const lodash = require("lodash"); // node_modules/lodash
 ```
 
-#### The `require()` Resolution Algorithm
+<a id="topic-4"></a>
+
+## 4. [The `require()` Resolution Algorithm](#key-topics)
 
 When you call `require(X)`, Node.js follows a **5-step algorithm** to find the module:
 
@@ -115,7 +135,9 @@ require("X")
           → Throw Error: Cannot find module 'X'
 ```
 
-#### Module Caching
+<a id="topic-5"></a>
+
+## 5. [Module Caching & Circular Dependencies](#key-topics)
 
 Node.js **caches** modules after the first `require()` call. Subsequent `require()` calls return the **same cached object** — the module code is **NOT re-executed**.
 
@@ -170,7 +192,7 @@ delete require.cache[require.resolve("./counter")];
 
 > 💡 Module caching means every module is essentially a **singleton**. This is why a database connection module works — you `require()` it in multiple files but they all share the **same** connection instance.
 
-#### Circular Dependencies
+### Circular Dependencies
 
 What happens when Module A requires Module B, and Module B requires Module A?
 
@@ -204,7 +226,9 @@ node a.js
 
 > ⚠️ Node.js handles circular dependencies by returning the **partially completed** `module.exports` of the unfinished module. This prevents infinite loops but can lead to `undefined` values if you're not careful.
 
-#### CommonJS vs ES Modules
+<a id="topic-6"></a>
+
+## 6. [CommonJS (CJS) vs ES Modules (ESM)](#key-topics)
 
 | Feature                 | CommonJS (CJS)                 | ES Modules (ESM)                                            |
 | ----------------------- | ------------------------------ | ----------------------------------------------------------- |
@@ -219,7 +243,9 @@ node a.js
 
 ---
 
-### Code Example
+<a id="topic-7"></a>
+
+## 7. [Code Examples: CommonJS (`using-cjs/`) & ES Modules (`using-mjs/`)](#key-topics)
 
 #### 1. CommonJS Module Demo (`using-cjs/`)
 
