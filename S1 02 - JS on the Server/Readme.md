@@ -15,15 +15,31 @@
 
 ---
 
-### What is "JS on the Server"?
+<a id="key-topics"></a>
+
+### Topics Covering
+
+> 1. [What is "JS on the Server"?](#topic-1)
+> 2. [Browser JS vs Server JS (Node.js)](#topic-2)
+> 3. [The Global Object (`global` vs `window` vs `globalThis`)](#topic-3)
+> 4. [What Node.js Adds to JavaScript](#topic-4)
+> 5. [Servers in Node.js & HTTP Protocol](#topic-5)
+> 6. [The V8 Engine Pipeline (Ignition + TurboFan)](#topic-6)
+> 7. [Code Examples: Terminal Execution, First Script & Minimal HTTP Server](#topic-7)
+
+---
+
+<a id="topic-1"></a>
+
+## 1. [What is "JS on the Server"?](#key-topics)
 
 **"JS on the Server"** means running JavaScript outside the browser — on a machine that serves data, files, and APIs to clients. Before Node.js, JavaScript was confined to the browser. Node.js changed that by pairing the **V8 engine** with **libuv**, giving JavaScript access to the file system, network, and OS — enabling it to power backend servers.
 
 > 💡 The same language you use for DOM manipulation can now read files, query databases, and serve HTTP responses.
 
-### How It Works
+<a id="topic-2"></a>
 
-#### Browser JS vs Server JS (Node.js)
+## 2. [Browser JS vs Server JS (Node.js)](#key-topics)
 
 The JavaScript **language** is the same in both environments, but the **runtime APIs** available are completely different:
 
@@ -41,7 +57,9 @@ The JavaScript **language** is the same in both environments, but the **runtime 
 | **OS Access**     | ❌ Completely sandboxed             | ✅ `os`, `child_process`, `path` modules   |
 | **Use Case**      | UI rendering, user interactions     | APIs, servers, CLI tools, scripting        |
 
-#### The Global Object
+<a id="topic-3"></a>
+
+## 3. [The Global Object (`global` vs `window` vs `globalThis`)](#key-topics)
 
 Every JavaScript runtime provides a **global object** — the top-level scope container. It differs per environment:
 
@@ -69,7 +87,9 @@ console.log(globalThis); // Works in Browser, Node.js, Workers — everywhere
 
 > 💡 **`globalThis`** was introduced in ES2020 specifically to solve the fragmentation of `window` vs `global` vs `self`. Always prefer `globalThis` for cross-platform code.
 
-#### What Node.js Adds to JavaScript
+<a id="topic-4"></a>
+
+## 4. [What Node.js Adds to JavaScript](#key-topics)
 
 Node.js extends the V8 engine with C++ bindings to provide APIs that JavaScript alone cannot offer:
 
@@ -84,7 +104,9 @@ Node.js extends the V8 engine with C++ bindings to provide APIs that JavaScript 
 | **Child Process** | `child_process`    | Spawn new processes, execute shell commands          |
 | **Streams**       | `stream`           | Handle data in chunks (readable, writable, duplex)   |
 
-#### Servers in Node.js
+<a id="topic-5"></a>
+
+## 5. [Servers in Node.js & HTTP Protocol](#key-topics)
 
 A **server** is a system that listens for incoming **client requests** and sends back **responses** — typically over the HTTP protocol.
 
@@ -111,7 +133,9 @@ Request 3 ─┘                                   when operations complete
 | **Memory usage**      | High (each thread ~2MB)          | Low (one thread + callbacks)  |
 | **Best for**          | CPU-intensive work               | I/O-intensive, real-time apps |
 
-#### The V8 Engine Pipeline
+<a id="topic-6"></a>
+
+## 6. [The V8 Engine Pipeline (Ignition + TurboFan)](#key-topics)
 
 The **V8 engine** converts JavaScript from human-readable code to machine code in multiple stages:
 
@@ -156,7 +180,9 @@ The **V8 engine** converts JavaScript from human-readable code to machine code i
 
 > ⚠️ V8's full architecture is covered in depth in **Chapter 8 — Deep dive into V8 JS Engine**. This is an introductory overview.
 
-### Code Example
+<a id="topic-7"></a>
+
+## 7. [Code Examples: Terminal Execution, First Script & Minimal HTTP Server](#key-topics)
 
 #### Running JavaScript via Terminal
 
