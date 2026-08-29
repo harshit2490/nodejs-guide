@@ -15,6 +15,23 @@
 
 ---
 
+<a id="key-topics"></a>
+
+### Topics Covering
+
+> 1. [Development History & Timeline of Node.js](#topic-1)
+> 2. [What is Node.js? & Core Architecture](#topic-2)
+> 3. [Key Features of Node.js](#topic-3)
+> 4. [Node.js vs Browser JavaScript](#topic-4)
+> 5. [Why Was Node.js Created? (The C10K Problem)](#topic-5)
+> 6. [Code Examples: `process`, REPL & Async I/O](#topic-6)
+
+---
+
+<a id="topic-1"></a>
+
+## 1. [Development History & Timeline of Node.js](#key-topics)
+
 ![](./History%20of%20Nodejs.png)
 
 #### Timeline
@@ -33,15 +50,15 @@
 
 ---
 
-### What is Node.js?
+<a id="topic-2"></a>
+
+## 2. [What is Node.js? & Core Architecture](#key-topics)
 
 **Node.js is a cross-platform, open-source JavaScript runtime environment** that executes JavaScript code outside of a web browser. It is built on Chrome's **V8 JavaScript engine** — the same engine that powers Google Chrome — and extended with **libuv**, a C library for asynchronous I/O, enabling Node.js to perform file system operations, networking, and more without blocking the main thread.
 
 > 💡 Node.js is **not** a language, **not** a framework, and **not** a library. It is a **runtime environment** — a place where JavaScript code can run.
 
-### How It Works
-
-#### Core Architecture
+### Core Architecture
 
 Node.js combines two powerful components:
 
@@ -59,7 +76,9 @@ Together, they give JavaScript the ability to:
 
 ---
 
-#### Key Features
+<a id="topic-3"></a>
+
+## 3. [Key Features of Node.js](#key-topics)
 
 ### 1. Event-Driven Architecture
 
@@ -100,7 +119,9 @@ Node.js runs JavaScript on a **single thread** (the Event Loop), but offloads he
 
 ---
 
-#### Node.js vs Browser JavaScript
+<a id="topic-4"></a>
+
+## 4. [Node.js vs Browser JavaScript](#key-topics)
 
 | Feature                | Browser JS                          | Node.js                                 |
 | ---------------------- | ----------------------------------- | --------------------------------------- |
@@ -112,7 +133,9 @@ Node.js runs JavaScript on a **single thread** (the Event Loop), but offloads he
 | **HTTP Server**        | ❌ Cannot create servers            | ✅ Built-in `http` module               |
 | **Use Case**           | Frontend, UI interactions           | Backend, APIs, CLI tools, microservices |
 
-#### Why Was Node.js Created?
+<a id="topic-5"></a>
+
+## 5. [Why Was Node.js Created? (The C10K Problem)](#key-topics)
 
 Before Node.js, web servers like **Apache HTTP Server** used a **thread-per-connection** model:
 
@@ -138,7 +161,9 @@ Client 3 ─┼──→ Single Thread (Event Loop) ──→ Delegates I/O to O
 Client 10,000 ─┘
 ```
 
-### Code Example
+<a id="topic-6"></a>
+
+## 6. [Code Examples: `process`, REPL & Async I/O](#key-topics)
 
 ```javascript
 // ✅ Checking your Node.js environment
