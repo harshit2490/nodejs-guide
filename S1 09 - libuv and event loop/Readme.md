@@ -15,15 +15,26 @@
 
 ---
 
+<a id="key-topics"></a>
+
+### Topics Covering
+
+> 1. [The Event Loop — 6 Phases Overview](#topic-1)
+> 2. [Inner Event Loop Flow (Call Stack, Phases & Microtasks)](#topic-2)
+> 3. [Microtask Queues — The Priority Lane (`nextTick` vs `Promise`)](#topic-3)
+> 4. [Practice Code Files & Step-by-Step Execution Examples](#topic-4)
+
+---
+
 ### What is This Chapter About?
 
 This chapter explains the **event loop** — the core mechanism that makes Node.js non-blocking. You’ll learn its 6 phases, where each type of callback runs, and how `process.nextTick()` and Promises (microtasks) jump the queue ahead of everything else.
 
 > 💡 The event loop is the **#1 most asked Node.js interview topic**. Master the phase order and you’ll nail any "predict the output" question.
 
-### How It Works
+<a id="topic-1"></a>
 
-#### The Event Loop — 6 Phases
+## 1. [The Event Loop — 6 Phases Overview](#key-topics)
 
 ![Event Loop Phases](./Event%20Loop%20Phases.png)
 
@@ -40,7 +51,9 @@ This chapter explains the **event loop** — the core mechanism that makes Node.
 | 5   | **Check**             | `setImmediate()` callbacks                       | `setImmediate()`                |
 | 6   | **Close Callbacks**   | Cleanup callbacks (`socket.on('close')`)         | `.on('close')`                  |
 
-#### Inner Event Loop ASCII Flow (with Call Stack & Microtasks)
+<a id="topic-2"></a>
+
+## 2. [Inner Event Loop Flow (Call Stack, Phases & Microtasks)](#key-topics)
 
 ```
         ┌──────────────────────────────────────────────────────────┐
@@ -95,7 +108,9 @@ This chapter explains the **event loop** — the core mechanism that makes Node.
 
 ---
 
-## Microtask Queues — The Priority Lane
+<a id="topic-3"></a>
+
+## 3. [Microtask Queues — The Priority Lane (`nextTick` vs `Promise`)](#key-topics)
 
 Microtasks run **between every phase** of the event loop, not inside any specific phase. They have **higher priority** than all 6 phases:
 
@@ -121,7 +136,9 @@ flowchart LR
 
 ---
 
-## Practice Code Files
+<a id="topic-4"></a>
+
+## 4. [Practice Code Files & Step-by-Step Execution Examples](#key-topics)
 
 | File                                    | What It Demonstrates                               |
 | --------------------------------------- | -------------------------------------------------- |
