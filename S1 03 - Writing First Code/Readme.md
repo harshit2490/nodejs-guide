@@ -15,13 +15,25 @@
 
 ---
 
+<a id="key-topics"></a>
+
+### Topics Covering
+
+> 1. [Downloading, Installing & Verifying Node.js](#topic-1)
+> 2. [Four Ways to Run JavaScript in Node.js](#topic-2)
+> 3. [Deep Dive: The Node.js REPL](#topic-3)
+> 4. [The `console` Object — Beyond `console.log`](#topic-4)
+> 5. [Code Examples: Exploring Node.js, REPL & CLI Arguments](#topic-5)
+
+---
+
 ### What is "Writing First Code" About?
 
 This chapter covers the practical foundations of working with Node.js — from **installing** it on your machine, to **writing and executing JavaScript files**, to exploring the **REPL** (Read-Eval-Print Loop) and mastering **`console`** methods. By the end, you'll know every way to run JavaScript outside the browser.
 
-### How It Works
+<a id="topic-1"></a>
 
-#### Installing Node.js
+## 1. [Downloading, Installing & Verifying Node.js](#key-topics)
 
 ##### Step 1: Download
 
@@ -55,7 +67,9 @@ npm -v
 
 If both commands return version numbers, Node.js is installed correctly.
 
-#### Four Ways to Run JavaScript in Node.js
+<a id="topic-2"></a>
+
+## 2. [Four Ways to Run JavaScript in Node.js](#key-topics)
 
 | Method           | Command                           | Best For                                  |
 | ---------------- | --------------------------------- | ----------------------------------------- |
@@ -141,7 +155,9 @@ echo "console.log('Piped!')" | node
 cat app.js | node
 ```
 
-#### Deep Dive: The Node.js REPL
+<a id="topic-3"></a>
+
+## 3. [Deep Dive: The Node.js REPL](#key-topics)
 
 The REPL is more powerful than it looks. Here are its key features:
 
@@ -205,17 +221,19 @@ Press `Tab` in the REPL to auto-complete:
 
 ##### REPL vs Browser Console
 
-| Feature                  | Browser Console          | Node.js REPL         |
-| ------------------------ | ------------------------ | -------------------- |
+| Feature                  | Browser Console         | Node.js REPL         |
+| ------------------------ | ----------------------- | -------------------- |
 | **DOM access**           | ✅ `document`, `window` | ❌ Not available     |
 | **File system**          | ❌ Sandboxed            | ✅ `require("fs")`   |
 | **Multi-line editor**    | ✅ Shift+Enter          | ✅ `.editor` command |
 | **Save session**         | ❌ No                   | ✅ `.save filename`  |
 | **Last result variable** | ✅ `$_`                 | ✅ `_`               |
 | **Tab completion**       | ✅ Yes                  | ✅ Yes               |
-| **Exit**                 | Close browser tab        | `.exit` or `Ctrl+D`  |
+| **Exit**                 | Close browser tab       | `.exit` or `Ctrl+D`  |
 
-#### The `console` Object — Beyond `console.log`
+<a id="topic-4"></a>
+
+## 4. [The `console` Object — Beyond `console.log`](#key-topics)
 
 Node.js inherits the familiar `console` object but also adds some powerful methods:
 
@@ -233,7 +251,9 @@ Node.js inherits the familiar `console` object but also adds some powerful metho
 | `console.assert()`       | Prints error only if assertion **fails**                     |
 | `console.trace()`        | Prints the **call stack trace**                              |
 
-### Code Example
+<a id="topic-5"></a>
+
+## 5. [Code Examples: Exploring Node.js, REPL & CLI Arguments](#key-topics)
 
 #### First Real Script — Exploring Node.js
 
