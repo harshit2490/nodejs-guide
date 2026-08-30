@@ -597,9 +597,6 @@ How Pipes work:
 - **Q: What are the golden rules to avoid blocking the main thread?**
   - A: (1) Never use `sync` methods in production (use async versions). (2) Don't parse/stringify huge JSON objects on the main thread. (3) Avoid complex regular expressions that can cause catastrophic backtracking. (4) Don't run CPU-intensive calculations on the main thread — use `worker_threads`. (5) Break large loops into chunks using `setImmediate()` to yield back to the event loop.
 
-- **Q: What's the difference between `dns.lookup()` and `dns.resolve()`?**
-  - A: `dns.lookup()` uses the operating system's resolver (`getaddrinfo`), which runs in the **thread pool** because it's a blocking system call. `dns.resolve()` uses **c-ares** (a C library for async DNS), which does NOT use the thread pool — it uses its own async mechanism. For high-throughput DNS resolution, prefer `dns.resolve()` to avoid thread pool contention.
-
 - **Q: What data structures does libuv use internally?**
   - A: `epoll` uses a **Red-Black tree** for efficient O(log n) management of file descriptors. Timers (`setTimeout`, `setInterval`) use a **Min-Heap** to efficiently find the timer with the shortest remaining time (O(1) for minimum, O(log n) for insertion).
 
