@@ -551,15 +551,6 @@ How Pipes work:
 
 ---
 
-### Practice File
-
-| File                                    | What It Demonstrates                                                     |
-| --------------------------------------- | ------------------------------------------------------------------------ |
-| [`ThreadPool.js`](./Code/ThreadPool.js) | 5 parallel crypto operations — demonstrates thread pool queuing behavior |
-| [`file.txt`](./Code/file.txt)           | Sample file for `fs.readFile()` demonstrations                           |
-
----
-
 ### Common Mistakes
 
 | Mistake                                                             | Why It's Wrong                                                                                                                                            |
