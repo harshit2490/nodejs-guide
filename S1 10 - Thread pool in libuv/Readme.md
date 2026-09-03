@@ -551,16 +551,25 @@ How Pipes work:
 
 ---
 
-### Common Mistakes
+### Practice File
 
-| Mistake                                                             | Why It's Wrong                                                                                                                                            |
-| ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| "All async operations in Node.js use the thread pool"               | ❌ Only operations without native OS async support use the thread pool. **Networking uses `epoll`/`kqueue`/`IOCP`** — not the thread pool                 |
-| "Node.js is single-threaded, so it can only do one thing at a time" | ❌ The **main JavaScript thread** is single-threaded, but libuv's **thread pool** enables parallel execution of I/O and crypto operations                 |
-| "Increasing thread pool size always improves performance"           | ❌ More threads = more **memory overhead** and **context-switching** cost. Beyond a certain point, performance degrades. Match pool size to your workload |
-| "Setting `UV_THREADPOOL_SIZE` anywhere in code works"               | ❌ It must be set **before any async operation** is called — ideally at the very first line. Once the pool is created, the size is fixed                  |
-| "`dns.lookup()` and `dns.resolve()` work the same way"              | ❌ `dns.lookup()` uses the **thread pool** (OS resolver via `getaddrinfo`), while `dns.resolve()` uses **c-ares** (no thread pool)                        |
-| "HTTP requests consume threads from the pool"                       | ❌ Networking (HTTP/TCP/UDP) uses **OS-level async** (`epoll`/`kqueue`/`IOCP`) — zero thread pool threads consumed                                        |
+| File                                    | What It Demonstrates                                                     |
+| --------------------------------------- | ------------------------------------------------------------------------ |
+| [`ThreadPool.js`](./Code/ThreadPool.js) | 5 parallel crypto operations — demonstrates thread pool queuing behavior |
+| [`file.txt`](./Code/file.txt)           | Sample file for `fs.readFile()` demonstrations                           |
+
+---
+
+### Common Misconceptions
+
+| Misconception                                                         | Reality                                                                                                                                                  |
+| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ❌ "All async operations in Node.js use the thread pool"               | ✅ Only operations without native OS async support use the thread pool. **Networking uses `epoll`/`kqueue`/`IOCP`** — not the thread pool                 |
+| ❌ "Node.js is single-threaded, so it can only do one thing at a time" | ✅ The **main JavaScript thread** is single-threaded, but libuv's **thread pool** enables parallel execution of I/O and crypto operations                 |
+| ❌ "Increasing thread pool size always improves performance"           | ✅ More threads = more **memory overhead** and **context-switching** cost. Beyond a certain point, performance degrades. Match pool size to your workload |
+| ❌ "Setting `UV_THREADPOOL_SIZE` anywhere in code works"               | ✅ It must be set **before any async operation** is called — ideally at the very first line. Once the pool is created, the size is fixed                  |
+| ❌ "`dns.lookup()` and `dns.resolve()` work the same way"              | ✅ `dns.lookup()` uses the **thread pool** (OS resolver via `getaddrinfo`), while `dns.resolve()` uses **c-ares** (no thread pool)                        |
+| ❌ "HTTP requests consume threads from the pool"                       | ✅ Networking (HTTP/TCP/UDP) uses **OS-level async** (`epoll`/`kqueue`/`IOCP`) — zero thread pool threads consumed                                        |
 
 <div style="font-size: 22px; color: red">
 <details>
@@ -587,6 +596,9 @@ How Pipes work:
 
 - **Q: What are the golden rules to avoid blocking the main thread?**
   - A: (1) Never use `sync` methods in production (use async versions). (2) Don't parse/stringify huge JSON objects on the main thread. (3) Avoid complex regular expressions that can cause catastrophic backtracking. (4) Don't run CPU-intensive calculations on the main thread — use `worker_threads`. (5) Break large loops into chunks using `setImmediate()` to yield back to the event loop.
+
+- **Q: What's the difference between `dns.lookup()` and `dns.resolve()`?**
+  - A: `dns.lookup()` uses the operating system's resolver (`getaddrinfo`), which runs in the **thread pool** because it's a blocking system call. `dns.resolve()` uses **c-ares** (a C library for async DNS), which does NOT use the thread pool — it uses its own async mechanism. For high-throughput DNS resolution, prefer `dns.resolve()` to avoid thread pool contention.
 
 - **Q: What data structures does libuv use internally?**
   - A: `epoll` uses a **Red-Black tree** for efficient O(log n) management of file descriptors. Timers (`setTimeout`, `setInterval`) use a **Min-Heap** to efficiently find the timer with the shortest remaining time (O(1) for minimum, O(log n) for insertion).
