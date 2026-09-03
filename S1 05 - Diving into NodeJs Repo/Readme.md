@@ -269,16 +269,16 @@ function readFile(path, callback) {
 
 > 💡 You never call bindings directly in your code — the `lib/` modules do it for you. But knowing this layer exists helps you understand **why** Node.js can do things that pure JavaScript can't (like reading files or opening network sockets).
 
-### Common Mistakes
+### Common Misconceptions
 
-| Mistake                                                   | Why It's Wrong                                                                                                                                                              |
-| --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| "Node.js is a programming language"                       | ❌ Node.js is a **runtime environment**. The language is JavaScript. Node.js = V8 + libuv + bindings + standard library.                                                    |
-| "Node.js is written in JavaScript"                        | ❌ Node.js is primarily written in **C++ and C** (V8, libuv, bindings). Only the standard library (`lib/`) is JavaScript.                                                   |
-| "V8 interprets JavaScript line by line"                   | ❌ V8 **compiles** JavaScript to machine code using JIT (Just-In-Time) compilation, not interpretation.                                                                     |
-| "Node.js is single-threaded so it can't do parallel work" | ❌ The **event loop** is single-threaded, but libuv's **thread pool** (4 threads by default) handles blocking operations in parallel.                                       |
-| "libuv is part of V8"                                     | ❌ V8 and libuv are completely **separate** projects. V8 handles JavaScript execution; libuv handles async I/O and the event loop.                                          |
-| "`lib/` and `src/` contain the same code"                 | ❌ `lib/` contains **JavaScript** (the API you use). `src/` contains **C++** (the bindings that call system-level operations). They work together but are different layers. |
+| Misconception                                               | Reality                                                                                                                                                                    |
+| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ❌ "Node.js is a programming language"                       | ✅ Node.js is a **runtime environment**. The language is JavaScript. Node.js = V8 + libuv + bindings + standard library.                                                    |
+| ❌ "Node.js is written in JavaScript"                        | ✅ Node.js is primarily written in **C++ and C** (V8, libuv, bindings). Only the standard library (`lib/`) is JavaScript.                                                   |
+| ❌ "V8 interprets JavaScript line by line"                   | ✅ V8 **compiles** JavaScript to machine code using JIT (Just-In-Time) compilation, not interpretation.                                                                     |
+| ❌ "Node.js is single-threaded so it can't do parallel work" | ✅ The **event loop** is single-threaded, but libuv's **thread pool** (4 threads by default) handles blocking operations in parallel.                                       |
+| ❌ "libuv is part of V8"                                     | ✅ V8 and libuv are completely **separate** projects. V8 handles JavaScript execution; libuv handles async I/O and the event loop.                                          |
+| ❌ "`lib/` and `src/` contain the same code"                 | ✅ `lib/` contains **JavaScript** (the API you use). `src/` contains **C++** (the bindings that call system-level operations). They work together but are different layers. |
 
 <div style="font-size: 22px; color: red">
 <details>
