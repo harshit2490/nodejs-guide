@@ -374,16 +374,16 @@ Hi this is demonstration of the event loop
 
 ---
 
-### Common Mistakes
+### Common Misconceptions
 
-| Mistake                                                 | Why It’s Wrong                                                                                                                       |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| "`process.nextTick` is part of the event loop"          | ❌ It runs **between** phases, not inside any phase. It has its own separate queue                                                   |
-| "`setImmediate` runs immediately"                       | ❌ It runs in the **Check phase** of the event loop, after Poll. The name is misleading                                              |
-| "`setTimeout(0)` and `setImmediate` have a fixed order" | ❌ At the top level, their order is **non-deterministic**. Inside I/O callbacks, `setImmediate` always runs first                    |
-| "Promises and `nextTick` have the same priority"        | ❌ `process.nextTick()` has **higher** priority than Promises. nextTick queue drains fully before Promise queue                      |
-| "Callbacks run in the order they were registered"       | ❌ Callbacks run based on **which phase fires first**, not registration order                                                        |
-| "Recursive `nextTick` is safe"                          | ❌ Recursive `nextTick` **starves the event loop** — I/O, timers, and everything else gets blocked until the nextTick queue is empty |
+| Misconception                                             | Reality                                                                                                                             |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| ❌ "`process.nextTick` is part of the event loop"          | ✅ It runs **between** phases, not inside any phase. It has its own separate queue                                                   |
+| ❌ "`setImmediate` runs immediately"                       | ✅ It runs in the **Check phase** of the event loop, after Poll. The name is misleading                                              |
+| ❌ "`setTimeout(0)` and `setImmediate` have a fixed order" | ✅ At the top level, their order is **non-deterministic**. Inside I/O callbacks, `setImmediate` always runs first                    |
+| ❌ "Promises and `nextTick` have the same priority"        | ✅ `process.nextTick()` has **higher** priority than Promises. nextTick queue drains fully before Promise queue                      |
+| ❌ "Callbacks run in the order they were registered"       | ✅ Callbacks run based on **which phase fires first**, not registration order                                                        |
+| ❌ "Recursive `nextTick` is safe"                          | ✅ Recursive `nextTick` **starves the event loop** — I/O, timers, and everything else gets blocked until the nextTick queue is empty |
 
 <div style="font-size: 22px; color: red">
 <details>
