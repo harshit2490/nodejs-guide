@@ -250,16 +250,16 @@ console.log("3 — End");
 
 ---
 
-### Common Mistakes
+### Common Misconceptions
 
-| Mistake                                                        | Why It's Wrong                                                                                                          |
-| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| "Node.js is a programming language"                            | ❌ Node.js is a **runtime environment**. The language is JavaScript                                                     |
-| "Node.js is a framework like Express"                          | ❌ Node.js is a **runtime**. Express is a framework built **on top of** Node.js                                         |
-| "Node.js is single-threaded, so it can't handle many requests" | ❌ Single-threaded refers to the **Event Loop**. Heavy I/O is offloaded to libuv's **thread pool** and the OS           |
-| "Node.js is only for web servers"                              | ❌ Node.js powers CLI tools, desktop apps (Electron), IoT, real-time apps, build tools, and more                        |
-| "Node.js created NPM"                                          | ❌ NPM was created by **Isaac Z. Schlueter** in 2010 as a separate project, later bundled with Node.js                  |
-| "Blocking and non-blocking produce different results"          | ❌ Both produce the **same result** — the difference is in **when** and **how** the result is delivered (sync vs async) |
+| Misconception                                                    | Reality                                                                                                                |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| ❌ "Node.js is a programming language"                            | ✅ Node.js is a **runtime environment**. The language is JavaScript                                                     |
+| ❌ "Node.js is a framework like Express"                          | ✅ Node.js is a **runtime**. Express is a framework built **on top of** Node.js                                         |
+| ❌ "Node.js is single-threaded, so it can't handle many requests" | ✅ Single-threaded refers to the **Event Loop**. Heavy I/O is offloaded to libuv's **thread pool** and the OS           |
+| ❌ "Node.js is only for web servers"                              | ✅ Node.js powers CLI tools, desktop apps (Electron), IoT, real-time apps, build tools, and more                        |
+| ❌ "Node.js created NPM"                                          | ✅ NPM was created by **Isaac Z. Schlueter** in 2010 as a separate project, later bundled with Node.js                  |
+| ❌ "Blocking and non-blocking produce different results"          | ✅ Both produce the **same result** — the difference is in **when** and **how** the result is delivered (sync vs async) |
 
 <div style="font-size: 22px; color: red">
 <details>
