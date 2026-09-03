@@ -354,16 +354,16 @@ node args.js Harshit 25
 
 > 💡 `process.argv[0]` is always the path to `node`, `process.argv[1]` is the script path, and your custom arguments start from `process.argv[2]`.
 
-### Common Mistakes
+### Common Misconceptions
 
-| Mistake                                                  | Why It's Wrong                                                                                                          |
-| -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| "I can run JS files by double-clicking them"             | ❌ `.js` files need to be executed via `node filename.js` in a terminal. Double-clicking opens them in a text editor    |
-| "The REPL and running a file are the same thing"         | ❌ REPL is **interactive** (one expression at a time). Files are executed **start to finish** in one go                 |
-| "`console.log` and `console.error` go to the same place" | ❌ `console.log` writes to **stdout**, while `console.error` and `console.warn` write to **stderr** — different streams |
-| "Node.js REPL is just like the browser console"          | ❌ Similar but different — REPL has `.save`, `.load`, `.editor` mode, and no DOM access. Browser console has DOM + `$_` |
-| "You need to install `console` in Node.js"               | ❌ `console` is a **global** — available everywhere without `require()`                                                 |
-| "`process.argv` starts with my arguments"                | ❌ `argv[0]` = node path, `argv[1]` = script path. Your arguments start from `argv[2]`                                  |
+| Misconception                                              | Reality                                                                                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| ❌ "I can run JS files by double-clicking them"             | ✅ `.js` files need to be executed via `node filename.js` in a terminal. Double-clicking opens them in a text editor    |
+| ❌ "The REPL and running a file are the same thing"         | ✅ REPL is **interactive** (one expression at a time). Files are executed **start to finish** in one go                 |
+| ❌ "`console.log` and `console.error` go to the same place" | ✅ `console.log` writes to **stdout**, while `console.error` and `console.warn` write to **stderr** — different streams |
+| ❌ "Node.js REPL is just like the browser console"          | ✅ Similar but different — REPL has `.save`, `.load`, `.editor` mode, and no DOM access. Browser console has DOM + `$_` |
+| ❌ "You need to install `console` in Node.js"               | ✅ `console` is a **global** — available everywhere without `require()`                                                 |
+| ❌ "`process.argv` starts with my arguments"                | ✅ `argv[0]` = node path, `argv[1]` = script path. Your arguments start from `argv[2]`                                  |
 
 <div style="font-size: 22px; color: red">
 <details>
