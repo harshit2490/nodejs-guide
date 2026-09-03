@@ -290,16 +290,16 @@ node server.js
 
 > 💡 This is a preview — **Chapter 11** covers `http.createServer()` in full detail.
 
-### Common Mistakes
+### Common Misconceptions
 
-| Mistake                                                    | Why It's Wrong                                                                                                              |
-| ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| "Browser JS and Node.js are different languages"           | ❌ Same language (ECMAScript). The difference is in the **runtime APIs** — DOM APIs in browser, `fs`/`http` in Node.js      |
-| "Node.js has `window` and `document`"                      | ❌ Those are **browser-only** globals. Node.js uses `global` / `globalThis` and has no DOM                                  |
-| "`this` at the top level in Node.js equals `global`"       | ❌ In Node.js modules (CommonJS), `this` at the top level equals `module.exports`, **not** `global`                         |
-| "V8 interprets JavaScript like Python"                     | ❌ V8 uses **JIT compilation** — it interprets first (Ignition) then compiles hot code to machine code (TurboFan)           |
-| "Node.js can only be used for web servers"                 | ❌ Node.js powers CLI tools, desktop apps (Electron), real-time apps, IoT, build tools (Webpack, Vite), scripting, and more |
-| "You need to install `console` or `setTimeout` in Node.js" | ❌ These are **globals** — available on the `global` object without any `require()` call                                    |
+| Misconception                                                | Reality                                                                                                                    |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| ❌ "Browser JS and Node.js are different languages"           | ✅ Same language (ECMAScript). The difference is in the **runtime APIs** — DOM APIs in browser, `fs`/`http` in Node.js      |
+| ❌ "Node.js has `window` and `document`"                      | ✅ Those are **browser-only** globals. Node.js uses `global` / `globalThis` and has no DOM                                  |
+| ❌ "`this` at the top level in Node.js equals `global`"       | ✅ In Node.js modules (CommonJS), `this` at the top level equals `module.exports`, **not** `global`                         |
+| ❌ "V8 interprets JavaScript like Python"                     | ✅ V8 uses **JIT compilation** — it interprets first (Ignition) then compiles hot code to machine code (TurboFan)           |
+| ❌ "Node.js can only be used for web servers"                 | ✅ Node.js powers CLI tools, desktop apps (Electron), real-time apps, IoT, build tools (Webpack, Vite), scripting, and more |
+| ❌ "You need to install `console` or `setTimeout` in Node.js" | ✅ These are **globals** — available on the `global` object without any `require()` call                                    |
 
 <div style="font-size: 22px; color: red">
 <details>
