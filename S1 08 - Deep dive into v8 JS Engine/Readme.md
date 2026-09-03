@@ -337,17 +337,17 @@ flowchart TD
 
 ---
 
-### Common Mistakes
+### Common Misconceptions
 
-| Mistake                                 | Why It’s Wrong                                                                         |
-| --------------------------------------- | -------------------------------------------------------------------------------------- |
-| "V8 interprets JavaScript line by line" | ❌ V8 uses a **two-tier JIT**: Ignition (bytecode) + TurboFan (machine code)           |
-| "JavaScript is always slow"             | ❌ TurboFan compiles hot paths to **optimized machine code** rivaling C++              |
-| "GC stops the entire program"           | ❌ V8 uses **incremental and concurrent GC** — most work happens in background         |
-| "All objects are stored the same way"   | ❌ V8 uses **hidden classes** for fast struct-like access on same-shaped objects       |
-| "`delete obj.prop` is harmless"         | ❌ `delete` **destroys hidden classes**. Use `obj.prop = undefined` instead            |
-| "JIT and AOT are the same"              | ❌ **AOT** compiles before execution. **JIT** compiles during, using runtime profiling |
-| "V8 parses the entire file upfront"     | ❌ V8 uses **lazy parsing** — defers functions until they’re actually called           |
+| Misconception                             | Reality                                                                               |
+| ----------------------------------------- | ------------------------------------------------------------------------------------- |
+| ❌ "V8 interprets JavaScript line by line" | ✅ V8 uses a **two-tier JIT**: Ignition (bytecode) + TurboFan (machine code)           |
+| ❌ "JavaScript is always slow"             | ✅ TurboFan compiles hot paths to **optimized machine code** rivaling C++              |
+| ❌ "GC stops the entire program"           | ✅ V8 uses **incremental and concurrent GC** — most work happens in background         |
+| ❌ "All objects are stored the same way"   | ✅ V8 uses **hidden classes** for fast struct-like access on same-shaped objects       |
+| ❌ "`delete obj.prop` is harmless"         | ✅ `delete` **destroys hidden classes**. Use `obj.prop = undefined` instead            |
+| ❌ "JIT and AOT are the same"              | ✅ **AOT** compiles before execution. **JIT** compiles during, using runtime profiling |
+| ❌ "V8 parses the entire file upfront"     | ✅ V8 uses **lazy parsing** — defers functions until they’re actually called           |
 
 <div style="font-size: 22px; color: red">
 <details>
