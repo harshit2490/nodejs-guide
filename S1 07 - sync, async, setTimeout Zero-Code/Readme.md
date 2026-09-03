@@ -518,17 +518,17 @@ Timer 2
 | [`setTimeoutZero.js`](./Code/setTimeoutZero.js) | setTimeout(0) trust issues — proves 0ms doesn’t mean immediate                         |
 | [`file.txt`](./Code/file.txt)                   | Sample file for read operations — "Hi i am a Nodejs Developer"                         |
 
-### Common Mistakes
+### Common Misconceptions
 
-| Mistake                                                        | Why It's Wrong                                                                                                                                  |
-| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| "`setTimeout(fn, 0)` runs the callback immediately"            | ❌ The callback goes to the **callback queue** and only runs when the call stack is empty — after all synchronous code finishes                 |
-| "Passing a callback to `readFileSync`"                         | ❌ `readFileSync` is synchronous and **ignores callbacks**. It returns data directly. Use `readFile` for callback-based async reads             |
-| "Async callbacks run in the order they were registered"        | ❌ Callbacks run in the order their **operations complete** — not the order they were registered. Network may finish before disk, or vice versa |
-| "The call stack can hold async callbacks while sync code runs" | ❌ Callbacks wait in the **callback queue** until the call stack is **completely empty**. The event loop enforces this                          |
-| "`setTimeout(fn, 5000)` guarantees exactly 5 seconds"          | ❌ It guarantees **at least** 5 seconds. If the call stack is busy, the callback waits longer (this is the "trust issue" with `setTimeout`)     |
-| "V8 handles `setTimeout` and `fs.readFile`"                    | ❌ V8 only executes JavaScript. Timers, I/O, and async ops are handled by **libuv**. V8 just runs the callbacks when they reach the call stack  |
-| "`pbkdf2Sync` is fine for production servers"                  | ❌ `pbkdf2Sync` with high iterations **freezes the entire event loop** — no other requests can be handled. Use the async `pbkdf2` instead       |
+| Misconception                                                    | Reality                                                                                                                                        |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| ❌ "`setTimeout(fn, 0)` runs the callback immediately"            | ✅ The callback goes to the **callback queue** and only runs when the call stack is empty — after all synchronous code finishes                 |
+| ❌ "Passing a callback to `readFileSync`"                         | ✅ `readFileSync` is synchronous and **ignores callbacks**. It returns data directly. Use `readFile` for callback-based async reads             |
+| ❌ "Async callbacks run in the order they were registered"        | ✅ Callbacks run in the order their **operations complete** — not the order they were registered. Network may finish before disk, or vice versa |
+| ❌ "The call stack can hold async callbacks while sync code runs" | ✅ Callbacks wait in the **callback queue** until the call stack is **completely empty**. The event loop enforces this                          |
+| ❌ "`setTimeout(fn, 5000)` guarantees exactly 5 seconds"          | ✅ It guarantees **at least** 5 seconds. If the call stack is busy, the callback waits longer (this is the "trust issue" with `setTimeout`)     |
+| ❌ "V8 handles `setTimeout` and `fs.readFile`"                    | ✅ V8 only executes JavaScript. Timers, I/O, and async ops are handled by **libuv**. V8 just runs the callbacks when they reach the call stack  |
+| ❌ "`pbkdf2Sync` is fine for production servers"                  | ✅ `pbkdf2Sync` with high iterations **freezes the entire event loop** — no other requests can be handled. Use the async `pbkdf2` instead       |
 
 <div style="font-size: 22px; color: red">
 <details>
