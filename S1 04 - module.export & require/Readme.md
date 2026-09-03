@@ -491,16 +491,16 @@ jsonData:  {
 
 > 💡 **Key Differences to Notice:** In CJS, functions are defined normally and exported via `module.exports = { ... }`. In ESM, functions use `export` keyword directly. CJS uses `require()` while ESM uses `import`. For JSON files, CJS uses `require("./data.json")` while ESM uses `import ... with { type: "json" }`. ESM also requires `.js` file extensions in import paths.
 
-### Common Mistakes
+### Common Misconceptions
 
-| Mistake                                           | Why It's Wrong                                                                                                                     |
-| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| "Using `exports = { ... }` to export an object"   | ❌ This reassigns the local `exports` variable. Node.js returns `module.exports`, not `exports`. Use `module.exports = { ... }`    |
-| "Module code runs every time you `require()` it"  | ❌ Module code runs **only once**. After that, `require()` returns the **cached** `module.exports` object                          |
-| "Forgetting `./` when requiring local files"      | ❌ Without `./`, Node.js thinks it's a core module or `node_modules` package — throws `Cannot find module` error                   |
-| "`require()` is asynchronous like `import`"       | ❌ `require()` is **synchronous** — it blocks execution until the module is loaded. ES `import` is asynchronous                    |
-| "Variables not exported are shared between files" | ❌ Each module has its own scope (thanks to the IIFE wrapper). Only `module.exports` properties are shared                         |
-| "Circular dependencies crash Node.js"             | ❌ Node.js handles them by returning the **partial** `module.exports` of the unfinished module — no crash, but may get `undefined` |
+| Misconception                                       | Reality                                                                                                                           |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| ❌ "Using `exports = { ... }` to export an object"   | ✅ This reassigns the local `exports` variable. Node.js returns `module.exports`, not `exports`. Use `module.exports = { ... }`    |
+| ❌ "Module code runs every time you `require()` it"  | ✅ Module code runs **only once**. After that, `require()` returns the **cached** `module.exports` object                          |
+| ❌ "Forgetting `./` when requiring local files"      | ✅ Without `./`, Node.js thinks it's a core module or `node_modules` package — throws `Cannot find module` error                   |
+| ❌ "`require()` is asynchronous like `import`"       | ✅ `require()` is **synchronous** — it blocks execution until the module is loaded. ES `import` is asynchronous                    |
+| ❌ "Variables not exported are shared between files" | ✅ Each module has its own scope (thanks to the IIFE wrapper). Only `module.exports` properties are shared                         |
+| ❌ "Circular dependencies crash Node.js"             | ✅ Node.js handles them by returning the **partial** `module.exports` of the unfinished module — no crash, but may get `undefined` |
 
 <div style="font-size: 22px; color: red">
 <details>
