@@ -440,17 +440,17 @@ Timer fired after 2 seconds
 (process exits — nothing more to do)
 ```
 
-### Common Mistakes
+### Common Misconceptions
 
-| Mistake                                                   | Why It's Wrong                                                                                                                                       |
-| --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| "libuv is part of V8"                                     | ❌ V8 and libuv are completely **separate** projects. V8 handles JS execution; libuv handles async I/O and the event loop                            |
-| "Node.js is single-threaded so it can't do parallel work" | ❌ The **event loop** is single-threaded, but libuv's **thread pool** handles blocking ops in parallel (4 threads by default)                        |
-| "All async operations use the thread pool"                | ❌ **Network I/O** uses OS async primitives (epoll/kqueue/IOCP) — no thread pool. Only file I/O, DNS, crypto, zlib use it                            |
-| "Synchronous and asynchronous produce different results"  | ❌ Both produce the **same result** — the difference is in **when** and **how** the result is delivered                                              |
-| "libuv does the actual I/O work"                          | ❌ libuv **manages and delegates** I/O operations. The OS kernel or thread pool workers perform the actual work                                      |
-| "Blocking code is always bad"                             | ❌ Synchronous code is fine for startup/config. It's **only a problem** in hot paths (request handlers, loops, event callbacks)                      |
-| "`readFile` is always faster than `readFileSync`"         | ❌ For a **single** file read, sync may be marginally faster (no callback overhead). Async wins when you have **multiple concurrent** I/O operations |
+| Misconception                                               | Reality                                                                                                                                             |
+| ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ❌ "libuv is part of V8"                                     | ✅ V8 and libuv are completely **separate** projects. V8 handles JS execution; libuv handles async I/O and the event loop                            |
+| ❌ "Node.js is single-threaded so it can't do parallel work" | ✅ The **event loop** is single-threaded, but libuv's **thread pool** handles blocking ops in parallel (4 threads by default)                        |
+| ❌ "All async operations use the thread pool"                | ✅ **Network I/O** uses OS async primitives (epoll/kqueue/IOCP) — no thread pool. Only file I/O, DNS, crypto, zlib use it                            |
+| ❌ "Synchronous and asynchronous produce different results"  | ✅ Both produce the **same result** — the difference is in **when** and **how** the result is delivered                                              |
+| ❌ "libuv does the actual I/O work"                          | ✅ libuv **manages and delegates** I/O operations. The OS kernel or thread pool workers perform the actual work                                      |
+| ❌ "Blocking code is always bad"                             | ✅ Synchronous code is fine for startup/config. It's **only a problem** in hot paths (request handlers, loops, event callbacks)                      |
+| ❌ "`readFile` is always faster than `readFileSync`"         | ✅ For a **single** file read, sync may be marginally faster (no callback overhead). Async wins when you have **multiple concurrent** I/O operations |
 
 <div style="font-size: 22px; color: red">
 <details>
