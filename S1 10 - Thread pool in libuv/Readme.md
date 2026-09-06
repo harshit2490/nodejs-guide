@@ -22,7 +22,7 @@
 > 1. [What is the Thread Pool & Why Does libuv Need It?](#topic-1)
 > 2. [Which Operations Use the Thread Pool?](#topic-2)
 > 3. [Thread Pool Size & `UV_THREADPOOL_SIZE`](#topic-3)
-> 4. [Networking — Why It Does NOT Use the Thread Pool](#topic-4)
+> 4. [Networking — Why It Does NOT Use the Thread Pool?](#topic-4)
 > 5. [OS-Level Async Mechanisms (`epoll`, `kqueue`, `IOCP`)](#topic-5)
 > 6. [Golden Rules — Don’t Block the Main Thread](#topic-6)
 > 7. [Code Example: Thread Pool in Action](#topic-7)
@@ -182,7 +182,7 @@ Time ~500ms: Tasks 2, 3, 4 also finish around the same time
 
 <a id="topic-4"></a>
 
-## 4. [Networking — Why It Does NOT Use the Thread Pool](#key-topics)
+## 4. [Networking — Why It Does NOT Use the Thread Pool?](#key-topics)
 
 A common misconception is that all async operations in Node.js use the thread pool. **Networking operations do NOT use the thread pool** — they use native OS async mechanisms instead.
 
