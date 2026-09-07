@@ -1,6 +1,6 @@
 <div align="center">
 
-|                                        ← Previous                                         | [📑 Table of Contents](../README.md#part-2) |                                             Next →                                              |
+|                                        ← Previous                                         | [📑 Table of Contents](../README.md#part-3) |                                             Next →                                              |
 | :---------------------------------------------------------------------------------------: | :-----------------------------------------: | :---------------------------------------------------------------------------------------------: |
 | [Chapter 10: Thread pool in libuv](../S1%2010%20-%20Thread%20pool%20in%20libuv/Readme.md) |                                             | [Chapter 12: Databases SQL and NoSQL](../S1%2012%20-%20Databases%20SQL%20and%20NoSQL/Readme.md) |
 
@@ -10,7 +10,7 @@
 
 # Chapter 11 — Creating the Server &nbsp;
 
-> **Season 1** | Part III — Building with Node.js
+> **Season 1** | Part III - Servers & Databases
 > [🎬 Link](https://namastedev.com/learn/namaste-node/creating-a-server)
 
 ---
@@ -447,7 +447,7 @@ app.get("/users", (req, res) => {
 
 <div align="center">
 
-|                                        ← Previous                                         | [📑 Table of Contents](../README.md#part-2) |                                             Next →                                              |
+|                                        ← Previous                                         | [📑 Table of Contents](../README.md#part-3) |                                             Next →                                              |
 | :---------------------------------------------------------------------------------------: | :-----------------------------------------: | :---------------------------------------------------------------------------------------------: |
 | [Chapter 10: Thread pool in libuv](../S1%2010%20-%20Thread%20pool%20in%20libuv/Readme.md) |                                             | [Chapter 12: Databases SQL and NoSQL](../S1%2012%20-%20Databases%20SQL%20and%20NoSQL/Readme.md) |
 
