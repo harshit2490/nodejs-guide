@@ -64,7 +64,7 @@ MongoDB Atlas Setup Flow:
 
   Step 1                Step 2               Step 3
   ┌──────────┐         ┌──────────┐         ┌──────────────┐
-  │ Sign Up  │ ──────▶ │ Create   │ ──────▶ │ Choose Cloud │
+  │ Sign Up  │──────▶ │ Create    │──────▶ │ Choose Cloud │
   │ / Login  │         │ Project  │         │ Provider     │
   └──────────┘         └──────────┘         │ + Region     │
                                             └──────┬───────┘
@@ -72,7 +72,7 @@ MongoDB Atlas Setup Flow:
                                                    ▼
   Step 6                Step 5               Step 4
   ┌──────────┐         ┌──────────┐         ┌──────────────┐
-  │ Connect! │ ◀────── │ Get Conn │ ◀────── │ Select Free  │
+  │ Connect! │ ◀──────│ Get Conn  │ ◀──────│ Select Free  │
   │          │         │ String   │         │ M0 Sandbox   │
   └──────────┘         └──────────┘         └──────────────┘
 ```
@@ -344,32 +344,32 @@ Node.js to MongoDB Connection Flow:
 
   Your Node.js App
   ┌────────────────────────────────────┐
-  │  const { MongoClient } = require  │
+  │  const { MongoClient } = require   │
   │  ("mongodb");                      │
   │                                    │
-  │  const client = new MongoClient   │
-  │  (url);                           │ ──── Creates client instance
+  │  const client = new MongoClient    │
+  │  (url);                            │ ──── Creates client instance
   │                                    │      (no connection yet!)
-  │  await client.connect();          │ ──── NOW it connects
+  │  await client.connect();           │ ──── NOW it connects
   │                                    │
-  │  const db = client.db("myDB");    │ ──── Selects database
+  │  const db = client.db("myDB");     │ ──── Selects database
   │                                    │
-  │  const col = db.collection        │
-  │  ("User");                        │ ──── Selects collection
+  │  const col = db.collection         │
+  │  ("User");                         │ ──── Selects collection
   └──────────────┬─────────────────────┘
                  │
                  │  TCP/TLS Connection
                  │  (uses connection string)
                  ▼
   MongoDB Atlas Cluster
-  ┌────────────────────────────────────┐
+  ┌──────────────────────────────────┐
   │  ┌──────┐ ┌──────┐ ┌──────┐      │
   │  │Node 1│ │Node 2│ │Node 3│      │
-  │  │Primary│ │Sec.  │ │Sec.  │      │
+  │  │Primary│ │Sec.  │ │Sec.  │     │
   │  └──────┘ └──────┘ └──────┘      │
-  │       Replica Set                  │
-  │       (Auto-managed by Atlas)      │
-  └────────────────────────────────────┘
+  │       Replica Set                │
+  │       (Auto-managed by Atlas)    │
+  └──────────────────────────────────┘
 ```
 
 </details>
@@ -665,7 +665,7 @@ Operation: Find all users from Mumbai
 
   MongoDB Compass (GUI):
   ┌─────────────────────────────────────────┐
-  │  Filter: { city: "Mumbai" }  [▶ Find]  │
+  │  Filter: { city: "Mumbai" }  [▶ Find]   │
   └─────────────────────────────────────────┘
 
   Node.js Driver:
@@ -702,21 +702,21 @@ Troubleshooting Decision Tree:
 
   Connection Failed?
        │
-  ┌────┴────────────────┐
+  ┌────┴─────────────────┐
   │  Check error message │
-  └────┬────────────────┘
+  └────┬─────────────────┘
        │
-  ┌────┴────┐
+  ┌────┴─────┐
   │ "timeout"│──▶ Check Network Access (IP whitelist)
-  └─────────┘
+  └──────────┘
   ┌─────────┐
   │ "auth"  │──▶ Check Database Access (username/password)
   └─────────┘
+  ┌─────────────┐
+  │ "ENOTFOUND" │──▶ Check connection string (typo in host?)
+  └─────────────┘
   ┌─────────┐
-  │ "ENOTFOUND"│──▶ Check connection string (typo in host?)
-  └─────────┘
-  ┌─────────┐
-  │ Other   │──▶ Check internet, VPN, firewall
+  │  Other  │──▶ Check internet, VPN, firewall
   └─────────┘
 ```
 
