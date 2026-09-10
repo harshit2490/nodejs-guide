@@ -16,7 +16,7 @@ async function main() {
     const data = {
         firstname: "Harshit",
         lastname: "Singh",
-        city: "Uttar Pradesh",
+        city: "Gorakhpur",
         phoneNumber: "2233445566",
     }
 
